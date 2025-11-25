@@ -12,7 +12,7 @@
     "backend": ["Java", "Kotlin", "Spring Boot", "Apache Kafka", "Oracle DB", "REST API"],
     "devops": ["Azure", "GCP", "OpenShift", "Kubernetes", "Docker", "Azure DevOps", "CI/CD"],
     "observability": ["Prometheus", "Grafana", "ELK Stack"],
-    "security": ["SecureFlag Champion", "Zarządzanie Ryzykiem IT", "RODO / GDPR", "OAuth2"]
+    "security": ["Blue Security Champion", "SecureFlag Champion", "Zarządzanie Ryzykiem IT", "RODO / GDPR", "OAuth2"]
   },
   "work": [
     {
@@ -24,8 +24,7 @@
         "Projektowanie i utrzymanie aplikacji backendowych w Kotlin/Java (Spring Boot).",
         "Budowa architektury sterowanej zdarzeniami (Event-driven) z wykorzystaniem Apache Kafka.",
         "Zarządzanie mikroserwisami na platformie OpenShift (orkiestracja i skalowanie).",
-        "Optymalizacja potoków CI/CD w Azure DevOps dla zwiększenia szybkości dostarczania.",
-        "Wyróżnienie: Roczna nagroda od Area Lead (2024) za wybitny wkład w kluczowe inicjatywy."
+        "Optymalizacja potoków CI/CD w Azure DevOps dla zwiększenia szybkości dostarczania."
       ]
     },
     {
@@ -37,8 +36,7 @@
         "Zarządzanie obszarem ryzyka IT oraz zgodności z regulacjami (Compliance).",
         "Udział w projektach tworzenia wirtualnych asystentów i platform tłumaczeniowych.",
         "Wdrożenie proaktywnego monitoringu i alertowania (Grafana/Prometheus).",
-        "Mentoring i coaching nowych członków zespołu, dzielenie się wiedzą.",
-        "Wyróżnienia: Roczna nagroda od Area Lead w latach 2021, 2022 i 2023."
+        "Mentoring i coaching nowych członków zespołu, dzielenie się wiedzą."
       ]
     },
     {
@@ -48,8 +46,7 @@
       "endDate": "2020-08",
       "highlights": [
         "Tworzenie narzędzi automatyzujących powtarzalne zadania (Python/Bash/Kotlin).",
-        "Transformacja procesów manualnych w pełni zautomatyzowane przepływy pracy.",
-        "Wyróżnienie: Nagroda roczna od Tribe Lead Application & Support."
+        "Transformacja procesów manualnych w pełni zautomatyzowane przepływy pracy."
       ]
     },
     {
@@ -72,6 +69,13 @@
         "Rozwój i utrzymanie natywnych aplikacji mobilnych na system Android."
       ]
     }
+  ],
+  "awards": [
+    { "title": "Roczna nagroda od Area Lead", "issuer": "ING Hubs Poland", "date": "2024" },
+    { "title": "Roczna nagroda od Area Lead", "issuer": "ING Tech Poland", "date": "2023" },
+    { "title": "Roczna nagroda od Area Lead", "issuer": "ING Tech Poland", "date": "2022" },
+    { "title": "Roczna nagroda od Area Lead", "issuer": "ING Tech Poland", "date": "2021" },
+    { "title": "Nagroda roczna Tribe Lead App & Support", "issuer": "ING Tech Poland", "date": "2020" }
   ],
   "certificates": [
     { "name": "Blue Security Champion", "issuer": "SecureFlag", "date": "2025" },

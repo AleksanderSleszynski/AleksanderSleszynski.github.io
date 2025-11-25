@@ -12,7 +12,7 @@
     "backend": ["Java", "Kotlin", "Spring Boot", "Apache Kafka", "Oracle DB", "REST API"],
     "devops": ["Azure", "GCP", "OpenShift", "Kubernetes", "Docker", "Azure DevOps", "CI/CD"],
     "observability": ["Prometheus", "Grafana", "ELK Stack"],
-    "security": ["Blue Security Champion","SecureFlag Champion", "IT Risk Mgmt", "GDPR", "OAuth2"]
+    "security": ["Blue Security Champion", "SecureFlag Champion", "IT Risk Mgmt", "GDPR", "OAuth2"]
   },
   "work": [
     {
@@ -24,8 +24,7 @@
         "Designing and maintaining backend applications in Kotlin/Java (Spring Boot).",
         "Building event-driven architecture using Apache Kafka.",
         "Managing microservices on OpenShift (orchestration & scaling).",
-        "Optimizing CI/CD pipelines in Azure DevOps.",
-        "Award: Annual Award from Area Lead (2024)."
+        "Optimizing CI/CD pipelines in Azure DevOps."
       ]
     },
     {
@@ -37,8 +36,7 @@
         "Addressed IT risk management & compliance topics.",
         "Developed virtual assistants & translation platforms.",
         "Implemented proactive monitoring (Grafana/Prometheus).",
-        "Mentoring and coaching new team members.",
-        "Awards: Annual Award from Area Lead (2021, 2022, 2023)."
+        "Mentoring and coaching new team members."
       ]
     },
     {
@@ -48,8 +46,7 @@
       "endDate": "2020-08",
       "highlights": [
         "Developed tools to automate recurring tasks (Python/Bash/Kotlin).",
-        "Transitioned manual processes to automated workflows.",
-        "Award: Tribe Lead Application & Support Annual Award."
+        "Transitioned manual processes to automated workflows."
       ]
     },
     {
@@ -73,9 +70,16 @@
       ]
     }
   ],
+  "awards": [
+    { "title": "Annual Award from Area Lead", "issuer": "ING Hubs Poland", "date": "2024" },
+    { "title": "Annual Award from Area Lead", "issuer": "ING Tech Poland", "date": "2023" },
+    { "title": "Annual Award from Area Lead", "issuer": "ING Tech Poland", "date": "2022" },
+    { "title": "Annual Award from Area Lead", "issuer": "ING Tech Poland", "date": "2021" },
+    { "title": "Tribe Lead Application & Support Annual Award", "issuer": "ING Tech Poland", "date": "2020" }
+  ],
   "certificates": [
     { "name": "Blue Security Champion", "issuer": "SecureFlag", "date": "2025" },
-    { "name": "Threat Model", "issuer": "SecureFlag", "date": "2025" }, 
+    { "name": "Threat Model", "issuer": "SecureFlag", "date": "2025" },
     { "name": "Kotlin Coroutines Workshop", "issuer": "kt.academy", "date": "2023" }
   ]
 }
