@@ -1,11 +1,119 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+// Import data from JSON file
+import resume from '../data/resume.json';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Import global styles manually. 
+import '../styles/global.css';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>root@devops:~</title>
+        
+        <!-- Preload fonts to avoid FOUT (Flash of Unstyled Text) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&display=swap" rel="stylesheet">
+    </head>
+    
+    <!-- 
+        Tailwind Classes used:
+        bg-[#0d1117] -> GitHub Dark background color
+        text-[#3fb950] -> Terminal Green text color
+        font-mono -> Forces the Fira Code font defined in CSS
+    -->
+    <body class="bg-[#0d1117] text-[#3fb950] font-mono min-h-screen p-4 sm:p-10 leading-relaxed selection:bg-green-900 selection:text-white antialiased">
+        
+        <main class="max-w-4xl mx-auto">
+            
+            <!-- Terminal Prompt Header -->
+            <div class="mb-10 opacity-70">
+                <span class="text-blue-400">visitor</span><span class="text-white">@</span><span class="text-purple-400">cv-system</span>:<span class="text-blue-400">~</span>$ ./show-resume.sh --verbose
+            </div>
+
+            <!-- Header Section: Name and Summary -->
+            <header class="mb-12 border-b border-gray-800 pb-8">
+                <h1 class="text-5xl font-bold text-gray-100 mb-2">{resume.basics.name}</h1>
+                <h2 class="text-2xl text-gray-400 mb-4">{resume.basics.label}</h2>
+                <p class="text-gray-400 max-w-2xl text-sm italic">
+                    {resume.basics.summary}
+                </p>
+                <div class="mt-4 flex gap-4 text-sm text-gray-500">
+                    <span>📍 {resume.basics.location}</span>
+                </div>
+            </header>
+
+            <!-- Skills Section -->
+            <section class="mb-12">
+                <h3 class="text-xl font-bold text-white mb-4 border-b border-gray-800 inline-block">01_SKILLS</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Backend Skills -->
+                    <div>
+                        <span class="text-purple-400 text-sm block mb-2">> Backend.scan()</span>
+                        <div class="flex flex-wrap gap-2">
+                            {resume.skills.backend.map((skill) => (
+                                <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">
+                                    {skill}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                    <!-- DevOps Skills -->
+                    <div>
+                        <span class="text-purple-400 text-sm block mb-2">> DevOps.scan()</span>
+                        <div class="flex flex-wrap gap-2">
+                            {resume.skills.devops.map((skill) => (
+                                <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">
+                                    {skill}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience Section -->
+            <section class="mb-12">
+                <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block">02_EXPERIENCE_LOG</h3>
+                
+                <div class="space-y-8">
+                    {resume.work.map((job) => (
+                        <div class="relative pl-6 border-l border-gray-700 hover:border-green-500 transition-colors duration-300">
+                            <!-- Timeline Dot -->
+                            <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-gray-700 rounded-full"></div>
+                            
+                            <!-- Job Title and Dates -->
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
+                                <h4 class="text-lg font-bold text-gray-100">{job.position}</h4>
+                                <span class="text-sm text-gray-500 font-bold">{job.startDate} — {job.endDate}</span>
+                            </div>
+                            <div class="text-purple-400 text-sm mb-2">@ {job.company}</div>
+                            
+                            <!-- Job Highlights / Responsibilities -->
+                            <ul class="list-none space-y-1">
+                                {job.highlights.map((item) => (
+                                    <li class="text-gray-400 text-sm flex items-start">
+                                        <span class="mr-2 text-green-500 opacity-50">></span>
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            <!-- Footer / EOF Marker -->
+            <div class="mt-20 pt-6 border-t border-gray-800 text-sm text-gray-600 flex justify-between">
+                <span>EOF</span>
+                <!-- Blinking cursor animation -->
+                <span class="animate-pulse">_</span>
+            </div>
+
+        </main>
+    </body>
+</html>
