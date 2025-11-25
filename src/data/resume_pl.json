@@ -74,8 +74,8 @@
     }
   ],
   "certificates": [
-    { "name": "SecureFlag - Blue Security Champion", "date": "2025" },
-    { "name": "SecureFlag - Threat Model", "date": "2025" },
+    { "name": "Blue Security Champion", "issuer": "SecureFlag", "date": "2025" },
+    { "name": "Threat Model", "issuer": "SecureFlag", "date": "2025" },
     { "name": "Kotlin Coroutines Workshop", "issuer": "kt.academy", "date": "2023" }
   ]
 }
