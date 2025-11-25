@@ -1,24 +1,27 @@
 /* IMPORT TAILWIND CSS v4 */
 @import "tailwindcss";
 
-/* THEME CONFIGURATION (Optional in v4)
-   In v4, you can define theme variables here using standard CSS syntax
-   if you want to customize colors or fonts further.
-*/
-
-/* HARD RESET / BASE STYLES
-   Ensures the dark background and green text persist even if
-   utilities fail to load immediately.
-*/
-body {
-    background-color: #0d1117; /* GitHub Dark background */
-    color: #3fb950;            /* Terminal Green text */
-    font-family: 'Fira Code', monospace; /* Monospace font */
+/* THEME CONFIGURATION */
+@theme {
+  --font-mono: "Fira Code", monospace;
+  
+  /* Custom color for terminal glow */
+  --color-terminal-glow: rgba(63, 185, 80, 0.6);
 }
 
-/* SCROLLBAR CUSTOMIZATION
-   Works on Chrome/Safari/Edge to keep the UI dark.
-*/
+/* HARD RESET / BASE STYLES */
+body {
+    background-color: #0d1117; 
+    color: #3fb950;            
+    font-family: var(--font-mono);
+}
+
+/* TERMINAL GLOW EFFECT */
+.text-glow {
+    text-shadow: 0 0 10px var(--color-terminal-glow);
+}
+
+/* SCROLLBAR CUSTOMIZATION */
 ::-webkit-scrollbar {
     width: 10px;
 }
