@@ -15,9 +15,9 @@ const ui = {
     backend_scan: { en: "Backend.scan()", pl: "Backend.skanuj()" },
     devops_scan: { en: "DevOps.scan()", pl: "DevOps.skanuj()" },
     experience_header: { en: "02_EXPERIENCE_LOG", pl: "02_HISTORIA_ZATRUDNIENIA" },
-    // NEW HEADER
-    achievements_header: { en: "03_ACHIEVEMENTS", pl: "03_OSIĄGNIĘCIA" },
-    // Renumbered Contact
+    // NEW HEADER: Now implies both Awards and Certs
+    achievements_header: { en: "03_ACHIEVEMENTS_&_AWARDS", pl: "03_OSIĄGNIĘCIA_I_NAGRODY" },
+    
     contact_header: { en: "04_COMMUNICATION_UPLINK", pl: "04_KANAŁ_KOMUNIKACJI" },
     
     // Contact Section
@@ -40,7 +40,10 @@ const icons = {
     email: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
     print: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>`,
     lang: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
-    award: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>`
+    // Certificate Badge
+    cert: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>`,
+    // Trophy Cup
+    trophy: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2h-6c-2.76 0-5 .78-5 4v4a10 10 0 0 0 10 10 4 4 0 0 0 10-10V6c0-3.22-2.24-4-5-4z"/></svg>`
 };
 ---
 
@@ -50,7 +53,19 @@ const icons = {
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <title>root@devops:~</title>
+        
+        <!-- SEO & Meta Tags (CRITICAL FOR PRODUCTION) -->
+        <title>{resumeEn.basics.name} - DevOps Engineer</title>
+        <meta name="description" content={resumeEn.basics.summary} />
+        
+        <!-- Open Graph (For nice LinkedIn/Facebook cards) -->
+        <meta property="og:title" content={`${resumeEn.basics.name} - ${resumeEn.basics.label}`} />
+        <meta property="og:description" content={resumeEn.basics.summary} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://twoja-domena.com" /> <!-- Replace with real URL when deployed -->
+        
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
         
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,9 +82,8 @@ const icons = {
                     <span class="text-blue-400">visitor</span><span class="text-white">@</span><span class="text-purple-400">cv-system</span>:<span class="text-blue-400">~</span>$ <span id="typewriter"></span><span class="animate-pulse">_</span>
                 </div>
                 
-                <!-- Utilities: Print & Language Toggle -->
                 <div class="flex items-center gap-4 print:hidden">
-                    <!-- Language Switcher (Dynamic JS) -->
+                    <!-- Language Switcher -->
                     <button id="lang-toggle" class="flex items-center gap-2 text-xs border border-green-900/50 bg-green-900/10 px-2 py-1 rounded hover:bg-green-900/30 transition-colors cursor-pointer group">
                         <span class="w-3 h-3 group-hover:text-white" set:html={icons.lang} />
                         <span class="text-green-400 font-bold lang-en">{ui.lang_toggle.en}</span>
@@ -87,7 +101,6 @@ const icons = {
 
             <!-- Header Section -->
             <header class="mb-12 border-b border-gray-800 pb-8 relative">
-                <!-- Name and Label (Usually same for both, but Label can be translated) -->
                 <div class="lang-en">
                     <h1 class="text-5xl font-bold text-gray-100 mb-2 text-glow">{resumeEn.basics.name}</h1>
                     <h2 class="text-2xl text-gray-400 mb-6">{resumeEn.basics.label}</h2>
@@ -99,20 +112,17 @@ const icons = {
                     <p class="text-gray-400 max-w-2xl text-sm italic mb-6 border-l-2 border-gray-700 pl-4">{resumePl.basics.summary}</p>
                 </div>
 
-                <!-- Social Links -->
                 <div class="flex flex-wrap gap-6 text-sm text-gray-400 mt-6 print:text-black">
                     <div class="flex items-center gap-2 hover:text-green-400 transition-colors">
                         <span class="lang-en">📍 {resumeEn.basics.location}</span>
                         <span class="lang-pl hidden">📍 {resumePl.basics.location}</span>
                     </div>
-                    
                     {resumeEn.basics.github && (
                         <a href={`https://github.com/${resumeEn.basics.github}`} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-green-400 transition-colors">
                             <span class="w-5 h-5" set:html={icons.github} />
                             GitHub
                         </a>
                     )}
-                    
                     {resumeEn.basics.linkedin && (
                         <a href={resumeEn.basics.linkedin} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-green-400 transition-colors">
                             <span class="w-5 h-5" set:html={icons.linkedin} />
@@ -129,14 +139,11 @@ const icons = {
                     <span class="lang-pl hidden">{ui.skills_header.pl}</span>
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Backend Skills -->
                     <div>
                         <span class="text-purple-400 text-sm block mb-2">> 
                             <span class="lang-en">{ui.backend_scan.en}</span>
                             <span class="lang-pl hidden">{ui.backend_scan.pl}</span>
                         </span>
-                        
-                        <!-- English Skills List -->
                         <div class="flex flex-wrap gap-2 lang-en">
                             {resumeEn.skills.backend.map((skill) => (
                                 <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">
@@ -144,7 +151,6 @@ const icons = {
                                 </span>
                             ))}
                         </div>
-                        <!-- Polish Skills List (Usually same, but kept separate for consistency) -->
                         <div class="flex flex-wrap gap-2 lang-pl hidden">
                             {resumePl.skills.backend.map((skill) => (
                                 <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">
@@ -153,14 +159,11 @@ const icons = {
                             ))}
                         </div>
                     </div>
-                    
-                    <!-- DevOps Skills -->
                     <div>
                         <span class="text-purple-400 text-sm block mb-2">> 
                             <span class="lang-en">{ui.devops_scan.en}</span>
                             <span class="lang-pl hidden">{ui.devops_scan.pl}</span>
                         </span>
-                        
                         <div class="flex flex-wrap gap-2 lang-en">
                             {resumeEn.skills.devops.map((skill) => (
                                 <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">
@@ -186,7 +189,6 @@ const icons = {
                     <span class="lang-pl hidden">{ui.experience_header.pl}</span>
                 </h3>
                 
-                <!-- ENGLISH Experience -->
                 <div class="space-y-8 lang-en">
                     {resumeEn.work.map((job) => (
                         <div class="relative pl-6 border-l border-gray-700 hover:border-green-500 transition-colors duration-300 break-inside-avoid">
@@ -208,7 +210,6 @@ const icons = {
                     ))}
                 </div>
 
-                <!-- POLISH Experience -->
                 <div class="space-y-8 lang-pl hidden">
                     {resumePl.work.map((job) => (
                         <div class="relative pl-6 border-l border-gray-700 hover:border-green-500 transition-colors duration-300 break-inside-avoid">
@@ -231,7 +232,7 @@ const icons = {
                 </div>
             </section>
 
-            <!-- NEW SECTION: Achievements / Certificates -->
+            <!-- ACHIEVEMENTS: Awards & Certificates Combined -->
             <section class="mb-12 break-inside-avoid">
                 <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
                     <span class="lang-en">{ui.achievements_header.en}</span>
@@ -239,13 +240,29 @@ const icons = {
                 </h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- EN Certificates -->
+                    <!-- ENGLISH Awards & Certs -->
                     <div class="lang-en contents">
+                        <!-- AWARDS (First for prestige) -->
+                        {resumeEn.awards.map((award) => (
+                            <div class="border border-yellow-900/40 bg-yellow-900/10 p-4 rounded hover:border-yellow-500/50 transition-colors group">
+                                <div class="flex items-start justify-between mb-2">
+                                    <span class="text-yellow-500 group-hover:text-yellow-300" set:html={icons.trophy} />
+                                    <span class="text-xs text-yellow-600/80 border border-yellow-900/50 px-1 rounded">[ AWARD ]</span>
+                                </div>
+                                <h4 class="font-bold text-gray-200 text-sm mb-1">{award.title}</h4>
+                                <div class="flex justify-between text-xs text-gray-500 font-mono mt-2">
+                                    <span>{award.issuer}</span>
+                                    <span>{award.date}</span>
+                                </div>
+                            </div>
+                        ))}
+                        
+                        <!-- CERTIFICATES -->
                         {resumeEn.certificates.map((cert) => (
                             <div class="border border-gray-800 bg-gray-900/20 p-4 rounded hover:border-green-500/50 transition-colors group">
                                 <div class="flex items-start justify-between mb-2">
-                                    <span class="text-green-400 group-hover:text-green-300" set:html={icons.award} />
-                                    <span class="text-xs text-gray-600 border border-gray-800 px-1 rounded">[ VERIFIED ]</span>
+                                    <span class="text-green-400 group-hover:text-green-300" set:html={icons.cert} />
+                                    <span class="text-xs text-gray-600 border border-gray-800 px-1 rounded">[ CERT ]</span>
                                 </div>
                                 <h4 class="font-bold text-gray-200 text-sm mb-1">{cert.name}</h4>
                                 <div class="flex justify-between text-xs text-gray-500 font-mono mt-2">
@@ -256,13 +273,29 @@ const icons = {
                         ))}
                     </div>
 
-                    <!-- PL Certificates -->
+                    <!-- POLISH Awards & Certs -->
                     <div class="lang-pl contents hidden">
+                        <!-- AWARDS -->
+                        {resumePl.awards.map((award) => (
+                            <div class="border border-yellow-900/40 bg-yellow-900/10 p-4 rounded hover:border-yellow-500/50 transition-colors group">
+                                <div class="flex items-start justify-between mb-2">
+                                    <span class="text-yellow-500 group-hover:text-yellow-300" set:html={icons.trophy} />
+                                    <span class="text-xs text-yellow-600/80 border border-yellow-900/50 px-1 rounded">[ NAGRODA ]</span>
+                                </div>
+                                <h4 class="font-bold text-gray-200 text-sm mb-1">{award.title}</h4>
+                                <div class="flex justify-between text-xs text-gray-500 font-mono mt-2">
+                                    <span>{award.issuer}</span>
+                                    <span>{award.date}</span>
+                                </div>
+                            </div>
+                        ))}
+                        
+                        <!-- CERTIFICATES -->
                         {resumePl.certificates.map((cert) => (
                             <div class="border border-gray-800 bg-gray-900/20 p-4 rounded hover:border-green-500/50 transition-colors group">
                                 <div class="flex items-start justify-between mb-2">
-                                    <span class="text-green-400 group-hover:text-green-300" set:html={icons.award} />
-                                    <span class="text-xs text-gray-600 border border-gray-800 px-1 rounded">[ ZWERYFIKOWANO ]</span>
+                                    <span class="text-green-400 group-hover:text-green-300" set:html={icons.cert} />
+                                    <span class="text-xs text-gray-600 border border-gray-800 px-1 rounded">[ CERTYFIKAT ]</span>
                                 </div>
                                 <h4 class="font-bold text-gray-200 text-sm mb-1">{cert.name}</h4>
                                 <div class="flex justify-between text-xs text-gray-500 font-mono mt-2">
@@ -310,7 +343,6 @@ const icons = {
 
         </main>
 
-        <!-- Scripts -->
         <script>
             // --- Typewriter Effect ---
             const text = "./show-resume.sh --verbose";
@@ -328,19 +360,15 @@ const icons = {
             // --- Language Switcher Logic ---
             const toggleBtn = document.getElementById('lang-toggle');
             
-            // FIX: Check if toggleBtn exists before adding listener to satisfy TypeScript/Strict Mode
             if (toggleBtn) {
                 toggleBtn.addEventListener('click', () => {
                     const enElements = document.querySelectorAll('.lang-en');
                     const plElements = document.querySelectorAll('.lang-pl');
-                    
-                    // Toggle 'hidden' class on all language elements
                     enElements.forEach(el => el.classList.toggle('hidden'));
                     plElements.forEach(el => el.classList.toggle('hidden'));
                 });
             }
 
-            // Init
             window.onload = typeWriter;
         </script>
     </body>
