@@ -1,0 +1,81 @@
+{
+  "basics": {
+    "name": "Aleksander Śleszyński",
+    "label": "Ekspert DevOps & Backend Developer",
+    "location": "Katowice, Polska (Hybrydowo)",
+    "email": "twoj.email@example.com",
+    "github": "AleksanderSleszynski",
+    "linkedin": "https://www.linkedin.com/in/aleksandersleszynski/",
+    "summary": "Ekspert DevOps z ponad 7-letnim doświadczeniem. Pasjonat budowania wysoce skalowalnych, bezpiecznych i odpornych systemów przy użyciu technologii Java/Kotlin oraz chmur Azure/GCP. Mentor i orędownik automatyzacji."
+  },
+  "skills": {
+    "backend": ["Java", "Kotlin", "Spring Boot", "Apache Kafka", "Oracle DB", "REST API"],
+    "devops": ["Azure", "GCP", "OpenShift", "Kubernetes", "Docker", "Azure DevOps", "CI/CD"],
+    "observability": ["Prometheus", "Grafana", "ELK Stack"],
+    "security": ["SecureFlag Champion", "Zarządzanie Ryzykiem IT", "RODO / GDPR", "OAuth2"]
+  },
+  "work": [
+    {
+      "company": "ING Hubs Poland",
+      "position": "Expert DevOps Engineer (Engineer IV)",
+      "startDate": "2024-01",
+      "endDate": "Obecnie",
+      "highlights": [
+        "Projektowanie i utrzymanie aplikacji backendowych w Kotlin/Java (Spring Boot).",
+        "Budowa architektury sterowanej zdarzeniami (Event-driven) z wykorzystaniem Apache Kafka.",
+        "Zarządzanie mikroserwisami na platformie OpenShift (orkiestracja i skalowanie).",
+        "Optymalizacja potoków CI/CD w Azure DevOps dla zwiększenia szybkości dostarczania.",
+        "Wyróżnienie: Roczna nagroda od Area Lead (2024) za wybitny wkład w kluczowe inicjatywy."
+      ]
+    },
+    {
+      "company": "ING Tech Poland",
+      "position": "Senior DevOps Engineer",
+      "startDate": "2020-08",
+      "endDate": "2023-12",
+      "highlights": [
+        "Zarządzanie obszarem ryzyka IT oraz zgodności z regulacjami (Compliance).",
+        "Udział w projektach tworzenia wirtualnych asystentów i platform tłumaczeniowych.",
+        "Wdrożenie proaktywnego monitoringu i alertowania (Grafana/Prometheus).",
+        "Mentoring i coaching nowych członków zespołu, dzielenie się wiedzą.",
+        "Wyróżnienia: Roczna nagroda od Area Lead w latach 2021, 2022 i 2023."
+      ]
+    },
+    {
+      "company": "ING Tech Poland",
+      "position": "DevOps Engineer",
+      "startDate": "2019-12",
+      "endDate": "2020-08",
+      "highlights": [
+        "Tworzenie narzędzi automatyzujących powtarzalne zadania (Python/Bash/Kotlin).",
+        "Transformacja procesów manualnych w pełni zautomatyzowane przepływy pracy.",
+        "Wyróżnienie: Nagroda roczna od Tribe Lead Application & Support."
+      ]
+    },
+    {
+      "company": "ING Tech Poland",
+      "position": "Junior DevOps Engineer",
+      "startDate": "2018-11",
+      "endDate": "2019-12",
+      "highlights": [
+        "Zarządzanie poważnymi incydentami (Major Incident Management) zgodnie z dobrymi praktykami ITIL.",
+        "Utrzymanie dokumentacji i procedur dla ING Private Cloud.",
+        "Wsparcie pierwszej linii (Service Desk) oraz monitoring infrastruktury IT."
+      ]
+    },
+    {
+      "company": "STEPMI",
+      "position": "Android Developer",
+      "startDate": "2016-04",
+      "endDate": "2018-10",
+      "highlights": [
+        "Rozwój i utrzymanie natywnych aplikacji mobilnych na system Android."
+      ]
+    }
+  ],
+  "certificates": [
+    { "name": "SecureFlag - Blue Security Champion", "date": "2025" },
+    { "name": "SecureFlag - Threat Model", "date": "2025" },
+    { "name": "Kotlin Coroutines Workshop", "issuer": "kt.academy", "date": "2023" }
+  ]
+}
