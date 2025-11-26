@@ -1,48 +1,18 @@
 ---
-// Import data
+import TerminalLayout from '../layouts/TerminalLayout.astro';
 import resumeEn from '../data/resume.json';
 import resumePl from '../data/resume_pl.json';
-// Importujemy też 'services' z configu
 import { ui, icons, services } from '../data/siteConfig';
 
-// Import styles
-import '../styles/global.css';
+// --- TYPE DEFINITIONS ---
+interface Award { title: string; issuer: string; date: string; }
+interface Certificate { name: string; issuer: string; date: string; }
+interface ResumeData { awards?: Award[]; certificates?: Certificate[]; [key: string]: any; }
 
-// --- TYPE DEFINITIONS (Fix for TypeScript errors) ---
-interface Award {
-    title: string;
-    issuer: string;
-    date: string;
-}
-
-interface Certificate {
-    name: string;
-    issuer: string;
-    date: string;
-}
-
-interface ResumeData {
-    awards?: Award[];
-    certificates?: Certificate[];
-    [key: string]: any; // Pozwala na inne pola (np. work, basics)
-}
-
-// --- LOGIC: Merge and Sort Achievements ---
-// Funkcja pomocnicza do łączenia nagród i certyfikatów w jedną listę
+// --- DATA LOGIC ---
 const getSortedAchievements = (data: ResumeData) => {
-    const awards = (data.awards || []).map((a: Award) => ({
-        ...a,
-        type: 'award', // Oznaczamy jako nagrodę
-        displayTitle: a.title // Ujednolicamy nazwę pola
-    }));
-    
-    const certs = (data.certificates || []).map((c: Certificate) => ({
-        ...c,
-        type: 'cert', // Oznaczamy jako certyfikat
-        displayTitle: c.name // Ujednolicamy nazwę pola
-    }));
-
-    // Łączymy i sortujemy malejąco po dacie (roku)
+    const awards = (data.awards || []).map((a: Award) => ({ ...a, type: 'award', displayTitle: a.title }));
+    const certs = (data.certificates || []).map((c: Certificate) => ({ ...c, type: 'cert', displayTitle: c.name }));
     return [...awards, ...certs].sort((a, b) => parseInt(b.date) - parseInt(a.date));
 };
 
@@ -50,303 +20,220 @@ const sortedAchievementsEn = getSortedAchievements(resumeEn);
 const sortedAchievementsPl = getSortedAchievements(resumePl);
 ---
 
-<html lang="pl">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        
-        <!-- SEO -->
-        <title>{resumeEn.basics.name} - DevOps Engineer</title>
-        <meta name="description" content={resumeEn.basics.summary} />
-        <meta property="og:title" content={`${resumeEn.basics.name} - ${resumeEn.basics.label}`} />
-        <meta property="og:description" content={resumeEn.basics.summary} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://twoja-domena.com" /> 
-        <meta property="og:image" content="https://twoja-domena.com/og-image.png" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&display=swap" rel="stylesheet">
-    </head>
+<TerminalLayout title={`${resumeEn.basics.name} - DevOps Engineer`} description={resumeEn.basics.summary}>
     
-    <body class="bg-[#0d1117] text-[#3fb950] font-mono min-h-screen p-4 sm:p-10 leading-relaxed selection:bg-green-900 selection:text-white antialiased">
+    <!-- Header Section -->
+    <header class="mb-12 border-b border-gray-800 pb-8 relative">
+        <div class="lang-en">
+            <h1 class="text-5xl font-bold text-gray-100 mb-2 text-glow">{resumeEn.basics.name}</h1>
+            <h2 class="text-2xl text-gray-400 mb-6">{resumeEn.basics.label}</h2>
+            <p class="text-gray-400 max-w-2xl text-sm italic mb-6 border-l-2 border-gray-700 pl-4">{resumeEn.basics.summary}</p>
+        </div>
+        <div class="lang-pl hidden">
+            <h1 class="text-5xl font-bold text-gray-100 mb-2 text-glow">{resumePl.basics.name}</h1>
+            <h2 class="text-2xl text-gray-400 mb-6">{resumePl.basics.label}</h2>
+            <p class="text-gray-400 max-w-2xl text-sm italic mb-6 border-l-2 border-gray-700 pl-4">{resumePl.basics.summary}</p>
+        </div>
+
+        <div class="flex flex-wrap gap-6 text-sm text-gray-400 mt-6 print:text-black">
+            <div class="flex items-center gap-2 hover:text-green-400 transition-colors">
+                <span class="lang-en">📍 {resumeEn.basics.location}</span>
+                <span class="lang-pl hidden">📍 {resumePl.basics.location}</span>
+            </div>
+            {resumeEn.basics.github && (
+                <a href={`https://github.com/${resumeEn.basics.github}`} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-green-400 transition-colors">
+                    <span class="w-5 h-5" set:html={icons.github} />
+                    GitHub
+                </a>
+            )}
+            {resumeEn.basics.linkedin && (
+                <a href={resumeEn.basics.linkedin} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-green-400 transition-colors">
+                    <span class="w-5 h-5" set:html={icons.linkedin} />
+                    LinkedIn
+                </a>
+            )}
+        </div>
+    </header>
+
+    <!-- Skills Section -->
+    <section class="mb-12 break-inside-avoid">
+        <h3 class="text-xl font-bold text-white mb-4 border-b border-gray-800 inline-block text-glow">
+            <span class="lang-en">{ui.skills_header.en}</span>
+            <span class="lang-pl hidden">{ui.skills_header.pl}</span>
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <span class="text-purple-400 text-sm block mb-2">> 
+                    <span class="lang-en">{ui.backend_scan.en}</span>
+                    <span class="lang-pl hidden">{ui.backend_scan.pl}</span>
+                </span>
+                <div class="flex flex-wrap gap-2 lang-en">
+                    {resumeEn.skills.backend.map((skill: string) => (
+                        <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">{skill}</span>
+                    ))}
+                </div>
+                <div class="flex flex-wrap gap-2 lang-pl hidden">
+                    {resumePl.skills.backend.map((skill: string) => (
+                        <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">{skill}</span>
+                    ))}
+                </div>
+            </div>
+            <div>
+                <span class="text-purple-400 text-sm block mb-2">> 
+                    <span class="lang-en">{ui.devops_scan.en}</span>
+                    <span class="lang-pl hidden">{ui.devops_scan.pl}</span>
+                </span>
+                <div class="flex flex-wrap gap-2 lang-en">
+                    {resumeEn.skills.devops.map((skill: string) => (
+                        <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">{skill}</span>
+                    ))}
+                </div>
+                <div class="flex flex-wrap gap-2 lang-pl hidden">
+                    {resumePl.skills.devops.map((skill: string) => (
+                        <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">{skill}</span>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="mb-12">
+        <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
+            <span class="lang-en">{ui.experience_header.en}</span>
+            <span class="lang-pl hidden">{ui.experience_header.pl}</span>
+        </h3>
         
-        <main class="max-w-4xl mx-auto">
-            
-            <!-- Terminal Prompt -->
-            <div class="mb-10 opacity-70 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div class="whitespace-nowrap">
-                    <span class="text-blue-400">{ui.visitor}</span><span class="text-white">@</span><span class="text-purple-400">{ui.host}</span>:<span class="text-blue-400">{ui.path}</span>$ <span id="typewriter"></span><span class="animate-pulse">_</span>
+        <div class="space-y-8 lang-en">
+            {resumeEn.work.map((job: any) => (
+                <div class="relative pl-6 border-l border-gray-700 hover:border-green-500 transition-colors duration-300 break-inside-avoid">
+                    <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-gray-700 rounded-full"></div>
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
+                        <h4 class="text-lg font-bold text-gray-100">{job.position}</h4>
+                        <span class="text-sm text-gray-500 font-bold">{job.startDate} — {job.endDate}</span>
+                    </div>
+                    <div class="text-purple-400 text-sm mb-2">@ {job.company}</div>
+                    <ul class="list-none space-y-1">
+                        {job.highlights.map((item: string) => <li class="text-gray-400 text-sm flex items-start"><span class="mr-2 text-green-500 opacity-50">></span>{item}</li>)}
+                    </ul>
                 </div>
-                
-                <div class="flex items-center gap-4 print:hidden">
-                    <!-- Lang Switch -->
-                    <button id="lang-toggle" class="flex items-center gap-2 text-xs border border-green-900/50 bg-green-900/10 px-2 py-1 rounded hover:bg-green-900/30 transition-colors cursor-pointer group">
-                        <span class="w-3 h-3 group-hover:text-white" set:html={icons.lang} />
-                        <span class="text-green-400 font-bold lang-en">{ui.lang_toggle.en}</span>
-                        <span class="text-green-400 font-bold lang-pl hidden">{ui.lang_toggle.pl}</span>
-                    </button>
+            ))}
+        </div>
 
-                    <!-- Print -->
-                    <button onclick="window.print()" class="flex items-center gap-2 text-xs border border-green-800 px-3 py-1 rounded hover:bg-green-900/30 transition-colors cursor-pointer text-gray-400 hover:text-white">
-                        <span set:html={icons.print} /> 
-                        <span class="lang-en">{ui.print_btn.en}</span>
-                        <span class="lang-pl hidden">{ui.print_btn.pl}</span>
-                    </button>
+        <div class="space-y-8 lang-pl hidden">
+            {resumePl.work.map((job: any) => (
+                <div class="relative pl-6 border-l border-gray-700 hover:border-green-500 transition-colors duration-300 break-inside-avoid">
+                    <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-gray-700 rounded-full"></div>
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
+                        <h4 class="text-lg font-bold text-gray-100">{job.position}</h4>
+                        <span class="text-sm text-gray-500 font-bold">{job.startDate} — {job.endDate}</span>
+                    </div>
+                    <div class="text-purple-400 text-sm mb-2">@ {job.company}</div>
+                    <ul class="list-none space-y-1">
+                        {job.highlights.map((item: string) => <li class="text-gray-400 text-sm flex items-start"><span class="mr-2 text-green-500 opacity-50">></span>{item}</li>)}
+                    </ul>
                 </div>
+            ))}
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="mb-12 break-inside-avoid">
+        <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
+            <span class="lang-en">{ui.achievements_header.en}</span>
+            <span class="lang-pl hidden">{ui.achievements_header.pl}</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- EN -->
+            <div class="lang-en contents">
+                {sortedAchievementsEn.map((item) => (
+                    <div class={`border p-4 rounded transition-colors group ${item.type === 'award' ? 'border-yellow-900/40 bg-yellow-900/10 hover:border-yellow-500/50' : 'border-gray-800 bg-gray-900/20 hover:border-green-500/50'}`}>
+                        <div class="flex items-start justify-between mb-2">
+                            <span class={`${item.type === 'award' ? 'text-yellow-500 group-hover:text-yellow-300' : 'text-green-400 group-hover:text-green-300'}`} set:html={item.type === 'award' ? icons.trophy : icons.cert} />
+                            <span class={`text-xs border px-1 rounded ${item.type === 'award' ? 'text-yellow-600/80 border-yellow-900/50' : 'text-gray-600 border-gray-800'}`}>
+                                {item.type === 'award' ? ui.lbl_award.en : ui.lbl_cert.en}
+                            </span>
+                        </div>
+                        <h4 class="font-bold text-gray-200 text-sm mb-1">{item.displayTitle}</h4>
+                        <div class="flex justify-between text-xs text-gray-500 font-mono mt-2">
+                            <span>{item.issuer}</span>
+                            <span>{item.date}</span>
+                        </div>
+                    </div>
+                ))}
             </div>
 
-            <!-- Header -->
-            <header class="mb-12 border-b border-gray-800 pb-8 relative">
-                <div class="lang-en">
-                    <h1 class="text-5xl font-bold text-gray-100 mb-2 text-glow">{resumeEn.basics.name}</h1>
-                    <h2 class="text-2xl text-gray-400 mb-6">{resumeEn.basics.label}</h2>
-                    <p class="text-gray-400 max-w-2xl text-sm italic mb-6 border-l-2 border-gray-700 pl-4">{resumeEn.basics.summary}</p>
-                </div>
-                <div class="lang-pl hidden">
-                    <h1 class="text-5xl font-bold text-gray-100 mb-2 text-glow">{resumePl.basics.name}</h1>
-                    <h2 class="text-2xl text-gray-400 mb-6">{resumePl.basics.label}</h2>
-                    <p class="text-gray-400 max-w-2xl text-sm italic mb-6 border-l-2 border-gray-700 pl-4">{resumePl.basics.summary}</p>
-                </div>
-
-                <div class="flex flex-wrap gap-6 text-sm text-gray-400 mt-6 print:text-black">
-                    <div class="flex items-center gap-2 hover:text-green-400 transition-colors">
-                        <span class="lang-en">📍 {resumeEn.basics.location}</span>
-                        <span class="lang-pl hidden">📍 {resumePl.basics.location}</span>
-                    </div>
-                    {resumeEn.basics.github && (
-                        <a href={`https://github.com/${resumeEn.basics.github}`} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-green-400 transition-colors">
-                            <span class="w-5 h-5" set:html={icons.github} />
-                            GitHub
-                        </a>
-                    )}
-                    {resumeEn.basics.linkedin && (
-                        <a href={resumeEn.basics.linkedin} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-green-400 transition-colors">
-                            <span class="w-5 h-5" set:html={icons.linkedin} />
-                            LinkedIn
-                        </a>
-                    )}
-                </div>
-            </header>
-
-            <!-- Skills -->
-            <section class="mb-12 break-inside-avoid">
-                <h3 class="text-xl font-bold text-white mb-4 border-b border-gray-800 inline-block text-glow">
-                    <span class="lang-en">{ui.skills_header.en}</span>
-                    <span class="lang-pl hidden">{ui.skills_header.pl}</span>
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <span class="text-purple-400 text-sm block mb-2">> 
-                            <span class="lang-en">{ui.backend_scan.en}</span>
-                            <span class="lang-pl hidden">{ui.backend_scan.pl}</span>
-                        </span>
-                        <div class="flex flex-wrap gap-2 lang-en">
-                            {resumeEn.skills.backend.map((skill) => (
-                                <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">{skill}</span>
-                            ))}
+            <!-- PL -->
+            <div class="lang-pl contents hidden">
+                {sortedAchievementsPl.map((item) => (
+                    <div class={`border p-4 rounded transition-colors group ${item.type === 'award' ? 'border-yellow-900/40 bg-yellow-900/10 hover:border-yellow-500/50' : 'border-gray-800 bg-gray-900/20 hover:border-green-500/50'}`}>
+                        <div class="flex items-start justify-between mb-2">
+                            <span class={`${item.type === 'award' ? 'text-yellow-500 group-hover:text-yellow-300' : 'text-green-400 group-hover:text-green-300'}`} set:html={item.type === 'award' ? icons.trophy : icons.cert} />
+                            <span class={`text-xs border px-1 rounded ${item.type === 'award' ? 'text-yellow-600/80 border-yellow-900/50' : 'text-gray-600 border-gray-800'}`}>
+                                {item.type === 'award' ? ui.lbl_award.pl : ui.lbl_cert.pl}
+                            </span>
                         </div>
-                        <div class="flex flex-wrap gap-2 lang-pl hidden">
-                            {resumePl.skills.backend.map((skill) => (
-                                <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">{skill}</span>
-                            ))}
+                        <h4 class="font-bold text-gray-200 text-sm mb-1">{item.displayTitle}</h4>
+                        <div class="flex justify-between text-xs text-gray-500 font-mono mt-2">
+                            <span>{item.issuer}</span>
+                            <span>{item.date}</span>
                         </div>
                     </div>
-                    <div>
-                        <span class="text-purple-400 text-sm block mb-2">> 
-                            <span class="lang-en">{ui.devops_scan.en}</span>
-                            <span class="lang-pl hidden">{ui.devops_scan.pl}</span>
-                        </span>
-                        <div class="flex flex-wrap gap-2 lang-en">
-                            {resumeEn.skills.devops.map((skill) => (
-                                <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">{skill}</span>
-                            ))}
-                        </div>
-                        <div class="flex flex-wrap gap-2 lang-pl hidden">
-                            {resumePl.skills.devops.map((skill) => (
-                                <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">{skill}</span>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
+                ))}
+            </div>
+        </div>
+    </section>
 
-            <!-- Experience -->
-            <section class="mb-12">
-                <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
-                    <span class="lang-en">{ui.experience_header.en}</span>
-                    <span class="lang-pl hidden">{ui.experience_header.pl}</span>
-                </h3>
-                
-                <div class="space-y-8 lang-en">
-                    {resumeEn.work.map((job) => (
-                        <div class="relative pl-6 border-l border-gray-700 hover:border-green-500 transition-colors duration-300 break-inside-avoid">
-                            <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-gray-700 rounded-full"></div>
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
-                                <h4 class="text-lg font-bold text-gray-100">{job.position}</h4>
-                                <span class="text-sm text-gray-500 font-bold">{job.startDate} — {job.endDate}</span>
-                            </div>
-                            <div class="text-purple-400 text-sm mb-2">@ {job.company}</div>
-                            <ul class="list-none space-y-1">
-                                {job.highlights.map((item) => <li class="text-gray-400 text-sm flex items-start"><span class="mr-2 text-green-500 opacity-50">></span>{item}</li>)}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-
-                <div class="space-y-8 lang-pl hidden">
-                    {resumePl.work.map((job) => (
-                        <div class="relative pl-6 border-l border-gray-700 hover:border-green-500 transition-colors duration-300 break-inside-avoid">
-                            <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-gray-700 rounded-full"></div>
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
-                                <h4 class="text-lg font-bold text-gray-100">{job.position}</h4>
-                                <span class="text-sm text-gray-500 font-bold">{job.startDate} — {job.endDate}</span>
-                            </div>
-                            <div class="text-purple-400 text-sm mb-2">@ {job.company}</div>
-                            <ul class="list-none space-y-1">
-                                {job.highlights.map((item) => <li class="text-gray-400 text-sm flex items-start"><span class="mr-2 text-green-500 opacity-50">></span>{item}</li>)}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            <!-- ACHIEVEMENTS (Combined & Sorted) -->
-            <section class="mb-12 break-inside-avoid">
-                <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
-                    <span class="lang-en">{ui.achievements_header.en}</span>
-                    <span class="lang-pl hidden">{ui.achievements_header.pl}</span>
-                </h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- EN (Mixed & Sorted) -->
-                    <div class="lang-en contents">
-                        {sortedAchievementsEn.map((item) => (
-                            <div class={`border p-4 rounded transition-colors group ${item.type === 'award' ? 'border-yellow-900/40 bg-yellow-900/10 hover:border-yellow-500/50' : 'border-gray-800 bg-gray-900/20 hover:border-green-500/50'}`}>
-                                <div class="flex items-start justify-between mb-2">
-                                    <!-- Icon based on type -->
-                                    <span class={`${item.type === 'award' ? 'text-yellow-500 group-hover:text-yellow-300' : 'text-green-400 group-hover:text-green-300'}`} set:html={item.type === 'award' ? icons.trophy : icons.cert} />
-                                    
-                                    <!-- Label based on type -->
-                                    <span class={`text-xs border px-1 rounded ${item.type === 'award' ? 'text-yellow-600/80 border-yellow-900/50' : 'text-gray-600 border-gray-800'}`}>
-                                        {item.type === 'award' ? ui.lbl_award.en : ui.lbl_cert.en}
-                                    </span>
-                                </div>
-                                <h4 class="font-bold text-gray-200 text-sm mb-1">{item.displayTitle}</h4>
-                                <div class="flex justify-between text-xs text-gray-500 font-mono mt-2">
-                                    <span>{item.issuer}</span>
-                                    <span>{item.date}</span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <!-- PL (Mixed & Sorted) -->
-                    <div class="lang-pl contents hidden">
-                        {sortedAchievementsPl.map((item) => (
-                            <div class={`border p-4 rounded transition-colors group ${item.type === 'award' ? 'border-yellow-900/40 bg-yellow-900/10 hover:border-yellow-500/50' : 'border-gray-800 bg-gray-900/20 hover:border-green-500/50'}`}>
-                                <div class="flex items-start justify-between mb-2">
-                                    <span class={`${item.type === 'award' ? 'text-yellow-500 group-hover:text-yellow-300' : 'text-green-400 group-hover:text-green-300'}`} set:html={item.type === 'award' ? icons.trophy : icons.cert} />
-                                    <span class={`text-xs border px-1 rounded ${item.type === 'award' ? 'text-yellow-600/80 border-yellow-900/50' : 'text-gray-600 border-gray-800'}`}>
-                                        {item.type === 'award' ? ui.lbl_award.pl : ui.lbl_cert.pl}
-                                    </span>
-                                </div>
-                                <h4 class="font-bold text-gray-200 text-sm mb-1">{item.displayTitle}</h4>
-                                <div class="flex justify-between text-xs text-gray-500 font-mono mt-2">
-                                    <span>{item.issuer}</span>
-                                    <span>{item.date}</span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <!-- NEW: SERVICES SECTION -->
-            <section class="mb-12 break-inside-avoid print:hidden">
-                <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
-                    <span class="lang-en">{ui.services_header.en}</span>
-                    <span class="lang-pl hidden">{ui.services_header.pl}</span>
-                </h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {services.map((service) => (
-                        <div class="border border-gray-800 bg-gray-900/10 p-4 rounded hover:bg-gray-800/30 hover:border-blue-500/50 transition-all group">
-                            <div class="mb-3 text-blue-400 group-hover:text-blue-300" set:html={service.icon} />
-                            <h4 class="font-bold text-gray-200 text-sm mb-2">
-                                <span class="lang-en">{service.title.en}</span>
-                                <span class="lang-pl hidden">{service.title.pl}</span>
-                            </h4>
-                            <p class="text-xs text-gray-500 leading-relaxed">
-                                <span class="lang-en">{service.desc.en}</span>
-                                <span class="lang-pl hidden">{service.desc.pl}</span>
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            <!-- Contact -->
-            <section class="mb-12 break-inside-avoid print:hidden">
-                <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
-                    <span class="lang-en">{ui.contact_header.en}</span>
-                    <span class="lang-pl hidden">{ui.contact_header.pl}</span>
-                </h3>
-                
-                <div class="border border-gray-700 p-8 rounded bg-gray-900/30 hover:border-green-500 transition-colors text-center">
-                    <div class="text-purple-400 text-sm mb-4 font-bold">> 
-                        <span class="lang-en">{ui.protocol_linkedin.en}</span>
-                        <span class="lang-pl hidden">{ui.protocol_linkedin.pl}</span>
-                    </div>
-                    <p class="text-gray-400 mb-8 max-w-2xl mx-auto text-sm">
-                        <span class="lang-en">{ui.contact_desc.en}</span>
-                        <span class="lang-pl hidden">{ui.contact_desc.pl}</span>
+    <!-- Services Section -->
+    <section class="mb-12 break-inside-avoid print:hidden">
+        <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
+            <span class="lang-en">{ui.services_header.en}</span>
+            <span class="lang-pl hidden">{ui.services_header.pl}</span>
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {services.map((service) => (
+                <div class="border border-gray-800 bg-gray-900/10 p-4 rounded hover:bg-gray-800/30 hover:border-blue-500/50 transition-all group">
+                    <div class="mb-3 text-blue-400 group-hover:text-blue-300" set:html={service.icon} />
+                    <h4 class="font-bold text-gray-200 text-sm mb-2">
+                        <span class="lang-en">{service.title.en}</span>
+                        <span class="lang-pl hidden">{service.title.pl}</span>
+                    </h4>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        <span class="lang-en">{service.desc.en}</span>
+                        <span class="lang-pl hidden">{service.desc.pl}</span>
                     </p>
-
-                    {resumeEn.basics.linkedin && (
-                        <a href={resumeEn.basics.linkedin} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-green-900/20 text-green-400 border border-green-800 px-6 py-3 rounded hover:bg-green-500 hover:text-black transition-all font-bold text-base group">
-                            <span class="w-5 h-5 group-hover:animate-bounce" set:html={icons.linkedin} />
-                            <span class="lang-en">{ui.btn_linkedin.en}</span>
-                            <span class="lang-pl hidden">{ui.btn_linkedin.pl}</span>
-                        </a>
-                    )}
                 </div>
-            </section>
+            ))}
+        </div>
+    </section>
 
-            <!-- Footer -->
-            <div class="mt-20 pt-6 border-t border-gray-800 text-sm text-gray-600 flex justify-between">
-                <span>{ui.footer_eof}</span>
-                <span class="animate-pulse">_</span>
+    <!-- Contact Section -->
+    <section class="mb-12 break-inside-avoid print:hidden">
+        <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
+            <span class="lang-en">{ui.contact_header.en}</span>
+            <span class="lang-pl hidden">{ui.contact_header.pl}</span>
+        </h3>
+        
+        <div class="border border-gray-700 p-8 rounded bg-gray-900/30 hover:border-green-500 transition-colors text-center">
+            <div class="text-purple-400 text-sm mb-4 font-bold">> 
+                <span class="lang-en">{ui.protocol_linkedin.en}</span>
+                <span class="lang-pl hidden">{ui.protocol_linkedin.pl}</span>
             </div>
+            <p class="text-gray-400 mb-8 max-w-2xl mx-auto text-sm">
+                <span class="lang-en">{ui.contact_desc.en}</span>
+                <span class="lang-pl hidden">{ui.contact_desc.pl}</span>
+            </p>
 
-        </main>
+            {resumeEn.basics.linkedin && (
+                <a href={resumeEn.basics.linkedin} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-green-900/20 text-green-400 border border-green-800 px-6 py-3 rounded hover:bg-green-500 hover:text-black transition-all font-bold text-base group">
+                    <span class="w-5 h-5 group-hover:animate-bounce" set:html={icons.linkedin} />
+                    <span class="lang-en">{ui.btn_linkedin.en}</span>
+                    <span class="lang-pl hidden">{ui.btn_linkedin.pl}</span>
+                </a>
+            )}
+        </div>
+    </section>
 
-        <script define:vars={{ command: ui.command }}>
-            // Typewriter
-            const text = command;
-            const element = document.getElementById("typewriter");
-            let index = 0;
-            function typeWriter() {
-                if (element && index < text.length) {
-                    element.innerHTML += text.charAt(index);
-                    index++;
-                    setTimeout(typeWriter, 50); 
-                }
-            }
-            window.onload = typeWriter;
-
-            // Lang Switcher
-            const toggleBtn = document.getElementById('lang-toggle');
-            if (toggleBtn) {
-                toggleBtn.addEventListener('click', () => {
-                    const enElements = document.querySelectorAll('.lang-en');
-                    const plElements = document.querySelectorAll('.lang-pl');
-                    enElements.forEach(el => el.classList.toggle('hidden'));
-                    plElements.forEach(el => el.classList.toggle('hidden'));
-                });
-            }
-        </script>
-    </body>
-</html>
+</TerminalLayout>
