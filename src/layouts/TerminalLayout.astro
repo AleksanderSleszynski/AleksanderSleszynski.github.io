@@ -13,7 +13,7 @@ const { title, description } = Astro.props;
 <!doctype html>
 <html lang="pl">
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
@@ -41,7 +41,7 @@ const { title, description } = Astro.props;
             
             <!-- GLOBAL TERMINAL PROMPT (Navbar) -->
             <div class="mb-10 opacity-70 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-
+                <!-- FIX: Changed whitespace handling for mobile. -->
                 <div class="whitespace-normal break-all sm:whitespace-nowrap text-xs sm:text-base">
                     <span class="text-blue-400">{ui.visitor}</span><span class="text-white">@</span><span class="text-purple-400">{ui.host}</span>:<span class="text-blue-400">{ui.path}</span>$ <span id="typewriter"></span><span class="animate-pulse">_</span>
                 </div>
@@ -90,7 +90,6 @@ const { title, description } = Astro.props;
             }
 
             // Language Switcher Logic
-            // Handles toggling classes on the entire document
             const toggleBtn = document.getElementById('lang-toggle');
             if (toggleBtn) {
                 toggleBtn.addEventListener('click', () => {
@@ -103,5 +102,11 @@ const { title, description } = Astro.props;
 
             window.onload = typeWriter;
         </script>
+
+        <!-- ANALYTICS INJECTION POINT -->
+        <!-- Cloudflare Web Analytics -->
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "248041f687934efa984ebf450e211ffd"}'></script>
+        <!-- End Cloudflare Web Analytics -->
+        
     </body>
 </html>
