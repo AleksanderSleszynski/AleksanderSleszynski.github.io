@@ -3,16 +3,16 @@
     "name": "Aleksander Śleszyński",
     "label": "Ekspert DevOps & Backend Developer",
     "location": "Katowice, Polska (Hybrydowo)",
-    "email": "twoj.email@example.com",
     "github": "AleksanderSleszynski",
     "linkedin": "https://www.linkedin.com/in/aleksandersleszynski/",
-    "summary": "Ekspert DevOps z ponad 7-letnim doświadczeniem. Pasjonat budowania wysoce skalowalnych, bezpiecznych i odpornych systemów przy użyciu technologii Java/Kotlin oraz chmur Azure/GCP. Mentor i orędownik automatyzacji."
+    "summary": "Ekspert DevOps z ponad 7-letnim doświadczeniem w branży IT. Pasjonat budowania wysoce skalowalnych, bezpiecznych i odpornych systemów. Moje kluczowe atuty to projektowanie rozwiązań cloud-native (Azure/GCP), automatyzacja procesów oraz wdrażanie najlepszych praktyk bezpieczeństwa. Doświadczony w zarządzaniu mikroserwisami na OpenShift oraz mentoringu zespołów inżynierskich."
   },
   "skills": {
-    "backend": ["Java", "Kotlin", "Spring Boot", "Apache Kafka", "Oracle DB", "REST API"],
-    "devops": ["Azure", "GCP", "OpenShift", "Kubernetes", "Docker", "Azure DevOps", "CI/CD"],
-    "observability": ["Prometheus", "Grafana", "ELK Stack"],
-    "security": ["Blue Security Champion", "SecureFlag Champion", "Zarządzanie Ryzykiem IT", "RODO / GDPR", "OAuth2"]
+    "backend": ["Kotlin", "Java", "Spring Boot", "Apache Kafka", "REST APIs", "Oracle DB", "SQL", "Microserwisy"],
+    "devops": ["OpenShift", "Docker", "Kubernetes", "Azure DevOps", "GCP", "CI/CD Pipelines", "Infrastructure as Code"],
+    "observability": ["Prometheus", "Grafana", "ELK Stack", "Analiza Logów"],
+    "security": ["Blue Security Champion", "Threat Modeling", "Zarządzanie Ryzykiem IT", "RODO / GDPR", "SecureFlag", "OAuth2"],
+    "agile": ["Scrum", "Kanban", "Peer Tutoring", "Mentoring"]
   },
   "work": [
     {
@@ -21,10 +21,14 @@
       "startDate": "2024-01",
       "endDate": "Obecnie",
       "highlights": [
-        "Projektowanie i utrzymanie aplikacji backendowych w Kotlin/Java (Spring Boot).",
-        "Budowa architektury sterowanej zdarzeniami (Event-driven) z wykorzystaniem Apache Kafka.",
-        "Zarządzanie mikroserwisami na platformie OpenShift (orkiestracja i skalowanie).",
-        "Optymalizacja potoków CI/CD w Azure DevOps dla zwiększenia szybkości dostarczania."
+        "Projektowanie, rozwój i utrzymanie aplikacji backendowych w Kotlin i Java (Spring Boot).",
+        "Budowa systemów sterowanych zdarzeniami (Event-driven) z wykorzystaniem Apache Kafka (produkowanie/konsumowanie wiadomości, zaawansowana analiza logów).",
+        "Zarządzanie i wdrażanie mikroserwisów na platformie OpenShift (konteneryzacja, orkiestracja, skalowanie).",
+        "Projektowanie i implementacja REST API, zarówno wewnętrznych, jak i wystawianych dla systemów zewnętrznych.",
+        "Kontrybucja w projektach wirtualnych asystentów, zgodności z RODO, platform tłumaczeniowych i procesów KYC.",
+        "Ustanowienie i optymalizacja potoków CI/CD w Azure DevOps w celu zwiększenia szybkości i niezawodności dostarczania.",
+        "Wdrożenie i utrzymanie monitoringu oraz alertowania w Grafana i Prometheus dla proaktywnej reakcji na incydenty.",
+        "Zarządzanie ryzykiem IT i zgodnością (compliance), zapewnienie przestrzegania regulacji wewnętrznych i zewnętrznych."
       ]
     },
     {
@@ -33,10 +37,11 @@
       "startDate": "2020-08",
       "endDate": "2023-12",
       "highlights": [
-        "Zarządzanie obszarem ryzyka IT oraz zgodności z regulacjami (Compliance).",
-        "Udział w projektach tworzenia wirtualnych asystentów i platform tłumaczeniowych.",
-        "Wdrożenie proaktywnego monitoringu i alertowania (Grafana/Prometheus).",
-        "Mentoring i coaching nowych członków zespołu, dzielenie się wiedzą."
+        "Rozwój i utrzymanie aplikacji backendowych Kotlin/Java przy użyciu frameworka Spring Boot.",
+        "Obsługa tematów ryzyka IT i compliance w regulowanym środowisku bankowym.",
+        "Udział w projektach związanych z tworzeniem wirtualnych asystentów.",
+        "Aktywna praca w metodykach Agile (Scrum/Kanban), wspieranie współpracy i ciągłego doskonalenia.",
+        "Coaching i mentoring dla nowych członków zespołu, wspieranie dzielenia się wiedzą."
       ]
     },
     {
@@ -45,8 +50,9 @@
       "startDate": "2019-12",
       "endDate": "2020-08",
       "highlights": [
-        "Tworzenie narzędzi automatyzujących powtarzalne zadania (Python/Bash/Kotlin).",
-        "Transformacja procesów manualnych w pełni zautomatyzowane przepływy pracy."
+        "Tworzenie narzędzi automatyzujących powtarzalne zadania (Python, Bash, Kotlin).",
+        "Transformacja procesów manualnych w pełni zautomatyzowane przepływy pracy.",
+        "Wyróżnienie: Roczna nagroda od Tribe Lead Application & Support za rozwój narzędzi do automatyzacji."
       ]
     },
     {
@@ -55,9 +61,10 @@
       "startDate": "2018-11",
       "endDate": "2019-12",
       "highlights": [
-        "Zarządzanie poważnymi incydentami (Major Incident Management) zgodnie z dobrymi praktykami ITIL.",
-        "Utrzymanie dokumentacji i procedur dla ING Private Cloud.",
-        "Wsparcie pierwszej linii (Service Desk) oraz monitoring infrastruktury IT."
+        "Koordynacja poważnych incydentów (Major Incident Management) zgodnie z praktykami ITIL.",
+        "Pełnienie roli Single Point of Contact i wsparcie pierwszej linii dla klientów międzynarodowych.",
+        "Utrzymanie dokumentacji w Atlassian Confluence dla Service Desk i procedur ING Private Cloud.",
+        "Monitoring stabilności systemów i infrastruktury IT, zarządzanie dostępem użytkowników i procesem zmian."
       ]
     },
     {
@@ -70,16 +77,33 @@
       ]
     }
   ],
+  "education": [
+    {
+      "institution": "Polsko-Japońska Akademia Technik Komputerowych",
+      "area": "Inżynieria Oprogramowania",
+      "startDate": "2012",
+      "endDate": "2016"
+    },
+    {
+      "institution": "Udacity",
+      "area": "Android Developer Nanodegree",
+      "startDate": "2015",
+      "endDate": "2016"
+    }
+  ],
   "awards": [
-    { "title": "Roczna nagroda od Area Lead", "issuer": "ING Hubs Poland", "date": "2024" },
-    { "title": "Roczna nagroda od Area Lead", "issuer": "ING Tech Poland", "date": "2023" },
-    { "title": "Roczna nagroda od Area Lead", "issuer": "ING Tech Poland", "date": "2022" },
-    { "title": "Roczna nagroda od Area Lead", "issuer": "ING Tech Poland", "date": "2021" },
-    { "title": "Nagroda roczna Tribe Lead App & Support", "issuer": "ING Tech Poland", "date": "2020" }
+    { "title": "Extra Mile Award", "issuer": "ING Hubs Poland", "date": "Lut 2024" },
+    { "title": "Director Award for 2023", "issuer": "ING Hubs Poland", "date": "2023" },
+    { "title": "Area Director’s Award", "issuer": "ING Hubs Poland", "date": "2022" },
+    { "title": "Director’s Awards Business Support Tribe", "issuer": "ING Tech Poland", "date": "Lut 2022" },
+    { "title": "Annual Award from Area Lead", "issuer": "ING Tech Poland", "date": "2021" },
+    { "title": "Tribe Lead Application & Support Annual Award", "issuer": "ING Tech Poland", "date": "Lut 2020" }
   ],
   "certificates": [
-    { "name": "Blue Security Champion", "issuer": "SecureFlag", "date": "2025" },
-    { "name": "Threat Model", "issuer": "SecureFlag", "date": "2025" },
-    { "name": "Kotlin Coroutines Workshop", "issuer": "kt.academy", "date": "2023" }
+    { "name": "Blue Security Champion", "issuer": "SecureFlag", "date": "Lut 2025" },
+    { "name": "Threat Model", "issuer": "SecureFlag", "date": "Lut 2025" },
+    { "name": "Kotlin Coroutines Workshop", "issuer": "kt.academy", "date": "Lut 2023" },
+    { "name": "Kotlin for Developers Workshop", "issuer": "kt.academy", "date": "Gru 2020" },
+    { "name": "Internetowe Rewolucje", "issuer": "Google", "date": "Gru 2015" }
   ]
 }

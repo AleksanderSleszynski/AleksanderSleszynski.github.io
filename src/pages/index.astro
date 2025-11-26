@@ -7,13 +7,21 @@ import { ui, icons, services } from '../data/siteConfig';
 // --- TYPE DEFINITIONS ---
 interface Award { title: string; issuer: string; date: string; }
 interface Certificate { name: string; issuer: string; date: string; }
-interface ResumeData { awards?: Award[]; certificates?: Certificate[]; [key: string]: any; }
+interface Education { institution: string; area: string; startDate: string; endDate: string; }
+interface ResumeData { awards?: Award[]; certificates?: Certificate[]; education?: Education[]; [key: string]: any; }
 
 // --- DATA LOGIC ---
 const getSortedAchievements = (data: ResumeData) => {
     const awards = (data.awards || []).map((a: Award) => ({ ...a, type: 'award', displayTitle: a.title }));
     const certs = (data.certificates || []).map((c: Certificate) => ({ ...c, type: 'cert', displayTitle: c.name }));
-    return [...awards, ...certs].sort((a, b) => parseInt(b.date) - parseInt(a.date));
+    return [...awards, ...certs].sort((a, b) => {
+        // Extract year from date strings (e.g. "Feb 2024" -> 2024)
+        const getYear = (d: string) => {
+            const match = d.match(/\d{4}/);
+            return match ? parseInt(match[0]) : 0;
+        };
+        return getYear(b.date) - getYear(a.date);
+    });
 };
 
 const sortedAchievementsEn = getSortedAchievements(resumeEn);
@@ -134,6 +142,47 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
                     </ul>
                 </div>
             ))}
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="mb-12 break-inside-avoid">
+        <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
+            <span class="lang-en">{ui.education_header.en}</span>
+            <span class="lang-pl hidden">{ui.education_header.pl}</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- EN -->
+            <div class="lang-en contents">
+                {resumeEn.education?.map((edu: Education) => (
+                    <div class="border border-gray-800 bg-gray-900/20 p-4 rounded hover:border-blue-500/50 transition-colors group">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="text-blue-400 group-hover:text-blue-300" set:html={icons.university} />
+                            <!-- FIX: Replaced lbl_degree with lbl_field to match siteConfig.ts -->
+                            <span class="text-xs text-gray-600 border border-gray-800 px-1 rounded">{ui.lbl_field.en}</span>
+                        </div>
+                        <h4 class="font-bold text-gray-200 text-sm mb-1">{edu.area}</h4>
+                        <div class="text-xs text-purple-400 mb-1">{edu.institution}</div>
+                        <div class="text-xs text-gray-500 font-mono">{edu.startDate} - {edu.endDate}</div>
+                    </div>
+                ))}
+            </div>
+            <!-- PL -->
+            <div class="lang-pl contents hidden">
+                {resumePl.education?.map((edu: Education) => (
+                    <div class="border border-gray-800 bg-gray-900/20 p-4 rounded hover:border-blue-500/50 transition-colors group">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="text-blue-400 group-hover:text-blue-300" set:html={icons.university} />
+                            <!-- FIX: Replaced lbl_degree with lbl_field to match siteConfig.ts -->
+                            <span class="text-xs text-gray-600 border border-gray-800 px-1 rounded">{ui.lbl_field.pl}</span>
+                        </div>
+                        <h4 class="font-bold text-gray-200 text-sm mb-1">{edu.area}</h4>
+                        <div class="text-xs text-purple-400 mb-1">{edu.institution}</div>
+                        <div class="text-xs text-gray-500 font-mono">{edu.startDate} - {edu.endDate}</div>
+                    </div>
+                ))}
+            </div>
         </div>
     </section>
 

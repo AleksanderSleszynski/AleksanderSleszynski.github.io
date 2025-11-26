@@ -3,16 +3,16 @@
     "name": "Aleksander Śleszyński",
     "label": "Expert DevOps Engineer & Backend Developer",
     "location": "Katowice, Poland (Hybrid)",
-    "email": "twoj.email@example.com",
     "github": "AleksanderSleszynski",
     "linkedin": "https://www.linkedin.com/in/aleksandersleszynski/",
-    "summary": "Expert DevOps Engineer with over 7 years of experience. Passionate about building highly scalable, secure, and resilient systems using Java/Kotlin and Azure/GCP. Mentor and advocate for automation."
+    "summary": "Expert DevOps Engineer with over 7 years of experience. Passionate about building highly scalable, secure, and resilient systems using Java/Kotlin and Azure/GCP. Proven expertise in process automation, risk management, security best practices, and creating reliable CI/CD pipelines. Mentor and advocate for automation."
   },
   "skills": {
-    "backend": ["Java", "Kotlin", "Spring Boot", "Apache Kafka", "Oracle DB", "REST API"],
-    "devops": ["Azure", "GCP", "OpenShift", "Kubernetes", "Docker", "Azure DevOps", "CI/CD"],
-    "observability": ["Prometheus", "Grafana", "ELK Stack"],
-    "security": ["Blue Security Champion", "SecureFlag Champion", "IT Risk Mgmt", "GDPR", "OAuth2"]
+    "backend": ["Java", "Kotlin", "Spring Boot", "Apache Kafka", "REST APIs", "Oracle DB", "SQL", "Microservices"],
+    "devops": ["OpenShift", "Docker", "Kubernetes", "Azure DevOps", "GCP", "CI/CD Pipelines", "Infrastructure as Code"],
+    "observability": ["Prometheus", "Grafana", "ELK Stack", "Log Analysis"],
+    "security": ["Blue Security Champion", "Threat Modeling", "IT Risk Mgmt", "GDPR", "SecureFlag", "OAuth2"],
+    "agile": ["Scrum", "Kanban", "Peer Tutoring", "Mentoring"]
   },
   "work": [
     {
@@ -21,10 +21,14 @@
       "startDate": "2024-01",
       "endDate": "Present",
       "highlights": [
-        "Designing and maintaining backend applications in Kotlin/Java (Spring Boot).",
-        "Building event-driven architecture using Apache Kafka.",
-        "Managing microservices on OpenShift (orchestration & scaling).",
-        "Optimizing CI/CD pipelines in Azure DevOps."
+        "Designed, developed, and maintained backend applications in Kotlin and Java using the Spring Boot framework.",
+        "Built event-driven applications leveraging Apache Kafka, including producing and consuming messages, and advanced log analysis.",
+        "Managed and deployed microservice applications on OpenShift, including containerization, orchestration, and scaling.",
+        "Designed and implemented REST APIs – both exposed and consumed within the organization – including applications with external endpoints consumed by third-party systems.",
+        "Contributed to projects involving virtual assistants, GDPR compliance, translation platforms, automation solutions and KYC processes with STP integration.",
+        "Established and optimized CI/CD pipelines in Azure DevOps, enhancing delivery speed and reliability.",
+        "Implemented and maintained monitoring and alerting solutions in Grafana and Prometheus, enabling proactive incident response.",
+        "Addressed IT risk management and compliance topics, ensuring adherence to internal and external regulatory standards."
       ]
     },
     {
@@ -33,10 +37,11 @@
       "startDate": "2020-08",
       "endDate": "2023-12",
       "highlights": [
-        "Addressed IT risk management & compliance topics.",
-        "Developed virtual assistants & translation platforms.",
-        "Implemented proactive monitoring (Grafana/Prometheus).",
-        "Mentoring and coaching new team members."
+        "Developed and maintained Kotlin and Java backend applications using Spring Boot framework.",
+        "Dealt with the topics of IT risk and compliance in a highly regulated banking environment.",
+        "Participated in projects related to the creation of virtual assistants.",
+        "Actively worked within Agile frameworks (Scrum/Kanban), driving collaboration and continuous improvement.",
+        "Coached and mentored new team members, fostering knowledge sharing and professional growth."
       ]
     },
     {
@@ -45,8 +50,9 @@
       "startDate": "2019-12",
       "endDate": "2020-08",
       "highlights": [
-        "Developed tools to automate recurring tasks (Python/Bash/Kotlin).",
-        "Transitioned manual processes to automated workflows."
+        "Developed tools to automate recurring tasks using Python, Bash, and Kotlin.",
+        "Transitioned manual processes to fully automated workflows.",
+        "Awarded with Annual award from Tribe Lead Application & Support for developing tools to automate recurring tasks."
       ]
     },
     {
@@ -55,9 +61,10 @@
       "startDate": "2018-11",
       "endDate": "2019-12",
       "highlights": [
-        "Major Incident Management according to ITIL.",
-        "Maintained ING Private Cloud procedures.",
-        "First-line support & infrastructure monitoring."
+        "Local Major Incident Management position with Major Incidents coordination according to ITIL practices.",
+        "Single Point of Contact and first-line of IT support for international customers.",
+        "Maintained Atlassian Documentation of Service Desk, Incident Management and ING Private Cloud procedures.",
+        "System and IT infrastructure monitoring, User Access Management, Change Management and Incident Management process."
       ]
     },
     {
@@ -70,16 +77,33 @@
       ]
     }
   ],
+  "education": [
+    {
+      "institution": "Polish-Japanese Academy of Information Technology",
+      "area": "Bachelor of Computer Software Engineering",
+      "startDate": "2012",
+      "endDate": "2016"
+    },
+    {
+      "institution": "Udacity",
+      "area": "Android Developer Nanodegree",
+      "startDate": "2015",
+      "endDate": "2016"
+    }
+  ],
   "awards": [
-    { "title": "Annual Award from Area Lead", "issuer": "ING Hubs Poland", "date": "2024" },
-    { "title": "Annual Award from Area Lead", "issuer": "ING Tech Poland", "date": "2023" },
-    { "title": "Annual Award from Area Lead", "issuer": "ING Tech Poland", "date": "2022" },
+    { "title": "Extra Mile Award", "issuer": "ING Hubs Poland", "date": "Feb 2024" },
+    { "title": "Director Award for 2023", "issuer": "ING Hubs Poland", "date": "2023" },
+    { "title": "Area Director’s Award", "issuer": "ING Hubs Poland", "date": "2022" },
+    { "title": "Director’s Awards Business Support Tribe", "issuer": "ING Tech Poland", "date": "Feb 2022" },
     { "title": "Annual Award from Area Lead", "issuer": "ING Tech Poland", "date": "2021" },
-    { "title": "Tribe Lead Application & Support Annual Award", "issuer": "ING Tech Poland", "date": "2020" }
+    { "title": "Tribe Lead Application & Support Annual Award", "issuer": "ING Tech Poland", "date": "Feb 2020" }
   ],
   "certificates": [
-    { "name": "Blue Security Champion", "issuer": "SecureFlag", "date": "2025" },
-    { "name": "Threat Model", "issuer": "SecureFlag", "date": "2025" },
-    { "name": "Kotlin Coroutines Workshop", "issuer": "kt.academy", "date": "2023" }
+    { "name": "Blue Security Champion", "issuer": "SecureFlag", "date": "Feb 2025" },
+    { "name": "Threat Model", "issuer": "SecureFlag", "date": "Feb 2025" },
+    { "name": "Kotlin Coroutines Workshop", "issuer": "kt.academy", "date": "Feb 2023" },
+    { "name": "Kotlin for Developers Workshop", "issuer": "kt.academy", "date": "Dec 2020" },
+    { "name": "Internetowe Rewolucje", "issuer": "Google", "date": "Dec 2015" }
   ]
 }
