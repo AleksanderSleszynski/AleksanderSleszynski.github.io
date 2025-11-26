@@ -1,3 +1,6 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.google.com/search?q=https://twoja-domena.com/sitemap-index.xml
+
+Sitemap index location
+
+Sitemap: https://www.google.com/search?q=https://aleksandersleszynski.github.io/sitemap-index.xml
