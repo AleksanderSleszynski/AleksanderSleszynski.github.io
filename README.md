@@ -1,46 +1,32 @@
-# Astro Starter Kit: Basics
+# Terminal Portfolio & CV
 
-```sh
-npm create astro@latest -- --template basics
-```
+A developer-centric, terminal-themed portfolio and curriculum vitae built with **Astro** and **Tailwind CSS**. Designed to reflect a DevOps Engineer's command-line environment preference.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**Live URL:** https://aleksandersleszynski.github.io
 
-## 🚀 Project Structure
+## Tech Stack
 
-Inside of your Astro project, you'll see the following folders and files:
+* **Framework:** Astro (Static Site Generation)
+* **Styling:** Tailwind CSS v4 (Utility-first)
+* **Language:** TypeScript
+* **Deployment:** GitHub Pages (via GitHub Actions)
+* **Icons:** Inline SVG (No external font dependencies)
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## Features
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+* **Terminal Aesthetic:** Custom font (Fira Code), blinking cursor, and shell-like prompts.
+* **Data-Driven:** Content is separated from logic (stored in `src/data/resume.json`), making updates easy.
+* **Internationalization (i18n):** Full support for English and Polish languages with instant toggling.
+* **Responsive:** Fully responsive layout that works on mobile and desktop.
+* **SEO Optimized:** Includes Open Graph tags, meta descriptions, and sitemap generation.
+* **Print Friendly:** Specific CSS rules to ensure the CV looks good when printed to PDF.
 
-## 🧞 Commands
+## Local Development
 
-All commands are run from the root of the project, from a terminal:
+To run this project locally:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+1. **Clone the repository:**
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+   ```bash
+   git clone [https://github.com/AleksanderSleszynski/AleksanderSleszynski.github.io.git](https://github.com/AleksanderSleszynski/AleksanderSleszynski.github.io.git)
+   cd AleksanderSleszynski.github.io
