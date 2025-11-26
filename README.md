@@ -1,6 +1,5 @@
 # Terminal Portfolio & CV
-
-![Deploy Status](https://github.com/AleksanderSleszynski/AleksanderSleszynski.github.io/actions/workflows/deploy.yml/badge.svg)
+[![Deploy to GitHub Pages](https://github.com/AleksanderSleszynski/AleksanderSleszynski.github.io/actions/workflows/deploy.yaml/badge.svg)](https://github.com/AleksanderSleszynski/AleksanderSleszynski.github.io/actions/workflows/deploy.yaml)
 
 A developer-centric, terminal-themed portfolio and curriculum vitae built with **Astro** and **Tailwind CSS**. Designed to reflect a DevOps Engineer's command-line environment preference.
 
