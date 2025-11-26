@@ -1,16 +1,18 @@
 # Terminal Portfolio & CV
 
+![Deploy Status](https://github.com/AleksanderSleszynski/AleksanderSleszynski.github.io/actions/workflows/deploy.yml/badge.svg)
+
 A developer-centric, terminal-themed portfolio and curriculum vitae built with **Astro** and **Tailwind CSS**. Designed to reflect a DevOps Engineer's command-line environment preference.
 
 **Live URL:** https://aleksandersleszynski.github.io
 
 ## Tech Stack
 
-* **Framework:** Astro (Static Site Generation)
-* **Styling:** Tailwind CSS v4 (Utility-first)
-* **Language:** TypeScript
-* **Deployment:** GitHub Pages (via GitHub Actions)
-* **Icons:** Inline SVG (No external font dependencies)
+* [Astro](https://astro.build) - Static Site Generation
+* [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework
+* [TypeScript](https://www.typescriptlang.org) - Typed JavaScript
+* [GitHub Pages](https://pages.github.com) - Hosting
+* [GitHub Actions](https://github.com/features/actions) - CI/CD
 
 ## Features
 
@@ -21,12 +23,26 @@ A developer-centric, terminal-themed portfolio and curriculum vitae built with *
 * **SEO Optimized:** Includes Open Graph tags, meta descriptions, and sitemap generation.
 * **Print Friendly:** Specific CSS rules to ensure the CV looks good when printed to PDF.
 
-## Local Development
+##  License
 
-To run this project locally:
+MIT License
 
-1. **Clone the repository:**
+Copyright (c) 2025 Aleksander Sleszynski
 
-   ```bash
-   git clone [https://github.com/AleksanderSleszynski/AleksanderSleszynski.github.io.git](https://github.com/AleksanderSleszynski/AleksanderSleszynski.github.io.git)
-   cd AleksanderSleszynski.github.io
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
