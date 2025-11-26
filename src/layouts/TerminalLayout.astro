@@ -34,13 +34,15 @@ const { title, description } = Astro.props;
         <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&display=swap" rel="stylesheet">
     </head>
     
-    <body class="bg-[#0d1117] text-[#3fb950] font-mono min-h-screen p-4 sm:p-10 leading-relaxed selection:bg-green-900 selection:text-white antialiased flex flex-col">
+    <!-- FIX: Added 'overflow-x-hidden' to body to prevent horizontal scrolling on mobile -->
+    <body class="bg-[#0d1117] text-[#3fb950] font-mono min-h-screen p-4 sm:p-10 leading-relaxed selection:bg-green-900 selection:text-white antialiased flex flex-col overflow-x-hidden">
         
         <main class="max-w-4xl mx-auto w-full flex-grow">
             
             <!-- GLOBAL TERMINAL PROMPT (Navbar) -->
             <div class="mb-10 opacity-70 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div class="whitespace-nowrap">
+
+                <div class="whitespace-normal break-all sm:whitespace-nowrap text-xs sm:text-base">
                     <span class="text-blue-400">{ui.visitor}</span><span class="text-white">@</span><span class="text-purple-400">{ui.host}</span>:<span class="text-blue-400">{ui.path}</span>$ <span id="typewriter"></span><span class="animate-pulse">_</span>
                 </div>
                 
