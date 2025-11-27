@@ -1,0 +1,10 @@
+[
+  {
+    "id": "gdpr-compliance-system",
+    "title": "GDPR Compliance Data Collection System",
+    "role": "Lead Backend Engineer & DevOps Architect",
+    "tech": ["Java", "Spring Boot", "Azure DevOps", "Kafka", "Prometheus", "Grafana", "OpenShift"],
+    "summary": "Architecting the application layer and CI/CD workflows for a regulatory system collecting customer data to meet EU GDPR requirements.",
+    "content": "PROBLEM:\nThe bank required a centralized system to collect customer data from various systems to fulfill EU GDPR requirements (Right of Access). The challenge involved integrating disparate banking systems, ensuring high observability, and enabling a team of developers new to the Java/Spring ecosystem to deliver production-ready code.\n\nSOLUTION:\nFocusing on the application lifecycle and resources on existing ING private cloud infrastructure, I:\n- Configured OpenShift namespaces and resource quotas for the project.\n- Designed and implemented robust CI/CD pipelines in Azure DevOps for automated delivery.\n- Developed a comprehensive Java/Spring Boot application skeleton that served as a standardized blueprint for the team.\n- Configured full observability (monitoring, logging, alerting) using Prometheus and Grafana.\n- Onboarded and mentored 3 developers, guiding them from zero to proficiency in Spring Boot.\n\nARCHITECTURE:\nThe system functioned as an event-driven consumer listening to Kafka topics. Upon receiving a trigger, it orchestrated data retrieval from multiple banking systems, generated a comprehensive PDF report, and securely uploaded it to a file repository accessible via mobile and web channels for the end customer.\n\nRESULT:\n- Successfully met strict regulatory deadlines.\n- The mentored team delivered a stable, high-quality application independently.\n- The automated pipeline and observability setup reduced operational overhead to a minimum."
+  }
+]
