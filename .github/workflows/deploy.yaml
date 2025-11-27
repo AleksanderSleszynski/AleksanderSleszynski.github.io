@@ -1,9 +1,9 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Trigger the workflow on every push to the 'master' branch
+  # Trigger the workflow on pushes to master AND feature branches
   push:
-    branches: [ master ]
+    branches: [ master, 'feature/**' ]
   # Allows manual execution from the Actions tab
   workflow_dispatch:
 
@@ -13,8 +13,7 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# Allow only one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -44,7 +43,9 @@ jobs:
           path: ./dist
 
   deploy:
+    # Deploy only if the build was successful AND we are on the master branch
     needs: build
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
