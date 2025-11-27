@@ -161,7 +161,6 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
                     <div class="border border-gray-800 bg-gray-900/20 p-4 rounded hover:border-blue-500/50 transition-colors group">
                         <div class="flex items-start justify-between mb-2">
                             <span class="text-blue-400 group-hover:text-blue-300" set:html={icons.university} />
-                            <!-- FIX: Replaced lbl_degree with lbl_field to match siteConfig.ts -->
                             <span class="text-xs text-gray-600 border border-gray-800 px-1 rounded">{ui.lbl_field.en}</span>
                         </div>
                         <h4 class="font-bold text-gray-200 text-sm mb-1">{edu.area}</h4>
@@ -176,7 +175,6 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
                     <div class="border border-gray-800 bg-gray-900/20 p-4 rounded hover:border-blue-500/50 transition-colors group">
                         <div class="flex items-start justify-between mb-2">
                             <span class="text-blue-400 group-hover:text-blue-300" set:html={icons.university} />
-                            <!-- FIX: Replaced lbl_degree with lbl_field to match siteConfig.ts -->
                             <span class="text-xs text-gray-600 border border-gray-800 px-1 rounded">{ui.lbl_field.pl}</span>
                         </div>
                         <h4 class="font-bold text-gray-200 text-sm mb-1">{edu.area}</h4>
@@ -257,14 +255,16 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
                         </div>
                     </div>
                     <p class="text-sm text-gray-400 mb-4 leading-relaxed">{project.summary}</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
+                    <div class="flex flex-wrap gap-2 mb-6">
                         {project.tech.map(t => <span class="text-xs bg-gray-800 text-gray-300 px-2 py-0.5 rounded">{t}</span>)}
                     </div>
+                    
+                    <!-- FIX: Better button with border and background -->
                     <button 
-                        class="text-xs text-green-400 hover:text-green-300 font-bold flex items-center gap-2 project-trigger"
+                        class="text-xs font-bold flex items-center gap-2 project-trigger border border-green-800 bg-green-900/20 px-3 py-1.5 rounded hover:bg-green-500 hover:text-black hover:border-green-500 transition-all w-fit"
                         data-id={`en-${project.id}`}
                     >
-                        {ui.lbl_read_more.en} <span class="animate-pulse">_</span>
+                        {ui.lbl_read_more.en}
                     </button>
                     
                     <!-- Hidden Content for Modal -->
@@ -289,14 +289,16 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
                         </div>
                     </div>
                     <p class="text-sm text-gray-400 mb-4 leading-relaxed">{project.summary}</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
+                    <div class="flex flex-wrap gap-2 mb-6">
                         {project.tech.map(t => <span class="text-xs bg-gray-800 text-gray-300 px-2 py-0.5 rounded">{t}</span>)}
                     </div>
+                    
+                    <!-- FIX: Better button with border and background -->
                     <button 
-                        class="text-xs text-green-400 hover:text-green-300 font-bold flex items-center gap-2 project-trigger"
+                        class="text-xs font-bold flex items-center gap-2 project-trigger border border-green-800 bg-green-900/20 px-3 py-1.5 rounded hover:bg-green-500 hover:text-black hover:border-green-500 transition-all w-fit"
                         data-id={`pl-${project.id}`}
                     >
-                        {ui.lbl_read_more.pl} <span class="animate-pulse">_</span>
+                        {ui.lbl_read_more.pl}
                     </button>
 
                     <!-- Hidden Content for Modal -->
@@ -406,8 +408,22 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
     function openModal(contentId: string, title: string) {
         const contentDiv = document.getElementById(`content-${contentId}`);
         if (contentDiv && modal && modalBody && modalTitle) {
-            modalBody.textContent = contentDiv.textContent || '';
+            // FIX: Improved text formatting logic
+            // This replaces raw newlines with better HTML structure for readability
+            const rawContent = contentDiv.textContent || '';
+            
+            // Format sections like "PROBLEM:", "SOLUTION:" with colors and spacing
+            let formattedHTML = rawContent
+                // Highlight headers (lines ending with :)
+                .replace(/([A-Z]+:)/g, '<br><span class="text-purple-400 font-bold block mt-4 mb-2">$1</span>')
+                // Handle bullet points if they exist in text (e.g. "- item")
+                .replace(/(\n- )/g, '<br><span class="text-green-500/70 mr-2">></span>')
+                // Clean up initial <br> if present
+                .replace(/^<br>/, '');
+
+            modalBody.innerHTML = formattedHTML;
             modalTitle.textContent = `${title.toLowerCase().replace(/\s+/g, '_')}.log`;
+            
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
