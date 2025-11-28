@@ -10,6 +10,20 @@ import { ui, icons, services } from '../data/siteConfig';
 interface Award { title: string; issuer: string; date: string; }
 interface Certificate { name: string; issuer: string; date: string; }
 interface Education { institution: string; area: string; startDate: string; endDate: string; }
+
+// Simplified Project Definition
+interface Project { 
+    id: string; 
+    title: string; 
+    role: string; 
+    tech: string[]; 
+    summary: string; 
+    problem?: string[];
+    solution?: string[];
+    architecture?: string[];
+    result?: string[];
+}
+
 interface ResumeData { awards?: Award[]; certificates?: Certificate[]; education?: Education[]; [key: string]: any; }
 
 // --- DATA LOGIC ---
@@ -17,7 +31,6 @@ const getSortedAchievements = (data: ResumeData) => {
     const awards = (data.awards || []).map((a: Award) => ({ ...a, type: 'award', displayTitle: a.title }));
     const certs = (data.certificates || []).map((c: Certificate) => ({ ...c, type: 'cert', displayTitle: c.name }));
     return [...awards, ...certs].sort((a, b) => {
-        // Extract year from date strings (e.g. "Feb 2024" -> 2024)
         const getYear = (d: string) => {
             const match = d.match(/\d{4}/);
             return match ? parseInt(match[0]) : 0;
@@ -32,7 +45,6 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
 
 <TerminalLayout title={`${resumeEn.basics.name} - DevOps Engineer`} description={resumeEn.basics.summary}>
     
-    <!-- Header Section -->
     <header class="mb-12 border-b border-gray-800 pb-8 relative">
         <div class="lang-en">
             <h1 class="text-5xl font-bold text-gray-100 mb-2 text-glow">{resumeEn.basics.name}</h1>
@@ -65,7 +77,6 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
         </div>
     </header>
 
-    <!-- Skills Section -->
     <section class="mb-12 break-inside-avoid">
         <h3 class="text-xl font-bold text-white mb-4 border-b border-gray-800 inline-block text-glow">
             <span class="lang-en">{ui.skills_header.en}</span>
@@ -107,7 +118,6 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
         </div>
     </section>
 
-    <!-- Experience Section -->
     <section class="mb-12">
         <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
             <span class="lang-en">{ui.experience_header.en}</span>
@@ -147,7 +157,6 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
         </div>
     </section>
 
-    <!-- Education Section -->
     <section class="mb-12 break-inside-avoid">
         <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
             <span class="lang-en">{ui.education_header.en}</span>
@@ -155,7 +164,6 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
         </h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- EN -->
             <div class="lang-en contents">
                 {resumeEn.education?.map((edu: Education) => (
                     <div class="border border-gray-800 bg-gray-900/20 p-4 rounded hover:border-blue-500/50 transition-colors group">
@@ -169,7 +177,6 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
                     </div>
                 ))}
             </div>
-            <!-- PL -->
             <div class="lang-pl contents hidden">
                 {resumePl.education?.map((edu: Education) => (
                     <div class="border border-gray-800 bg-gray-900/20 p-4 rounded hover:border-blue-500/50 transition-colors group">
@@ -186,7 +193,6 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
         </div>
     </section>
 
-    <!-- Achievements Section -->
     <section class="mb-12 break-inside-avoid">
         <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
             <span class="lang-en">{ui.achievements_header.en}</span>
@@ -194,7 +200,6 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
         </h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- EN -->
             <div class="lang-en contents">
                 {sortedAchievementsEn.map((item) => (
                     <div class={`border p-4 rounded transition-colors group ${item.type === 'award' ? 'border-yellow-900/40 bg-yellow-900/10 hover:border-yellow-500/50' : 'border-gray-800 bg-gray-900/20 hover:border-green-500/50'}`}>
@@ -213,7 +218,6 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
                 ))}
             </div>
 
-            <!-- PL -->
             <div class="lang-pl contents hidden">
                 {sortedAchievementsPl.map((item) => (
                     <div class={`border p-4 rounded transition-colors group ${item.type === 'award' ? 'border-yellow-900/40 bg-yellow-900/10 hover:border-yellow-500/50' : 'border-gray-800 bg-gray-900/20 hover:border-green-500/50'}`}>
@@ -234,16 +238,14 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
         </div>
     </section>
 
-    <!-- NEW: PROJECTS ARCHIVE -->
     <section class="mb-12 break-inside-avoid">
         <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
             <span class="lang-en">{ui.projects_header.en}</span>
             <span class="lang-pl hidden">{ui.projects_header.pl}</span>
         </h3>
 
-        <!-- EN Projects -->
         <div class="grid grid-cols-1 gap-4 lang-en">
-            {projectsEn.map((project) => (
+            {projectsEn.map((project: any) => (
                 <div class="border border-gray-800 bg-gray-900/10 p-6 rounded hover:bg-gray-800/20 transition-colors group relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-2 opacity-20 group-hover:opacity-40 transition-opacity">
                         <span class="text-gray-500" set:html={icons.file} />
@@ -256,28 +258,23 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
                     </div>
                     <p class="text-sm text-gray-400 mb-4 leading-relaxed">{project.summary}</p>
                     <div class="flex flex-wrap gap-2 mb-6">
-                        {project.tech.map(t => <span class="text-xs bg-gray-800 text-gray-300 px-2 py-0.5 rounded">{t}</span>)}
+                        {project.tech.map((t: string) => <span class="text-xs bg-gray-800 text-gray-300 px-2 py-0.5 rounded">{t}</span>)}
                     </div>
                     
-                    <!-- FIX: Better button with border and background -->
                     <button 
-                        class="text-xs font-bold flex items-center gap-2 project-trigger border border-green-800 bg-green-900/20 px-3 py-1.5 rounded hover:bg-green-500 hover:text-black hover:border-green-500 transition-all w-fit"
+                        class="relative z-20 text-xs font-bold flex items-center gap-2 project-trigger border border-green-800 bg-green-900/20 px-3 py-1.5 rounded hover:bg-green-500 hover:text-black hover:border-green-500 transition-all w-fit cursor-pointer"
                         data-id={`en-${project.id}`}
                     >
                         {ui.lbl_read_more.en}
                     </button>
                     
-                    <!-- Hidden Content for Modal -->
-                    <div id={`content-en-${project.id}`} class="hidden">
-                        {project.content}
-                    </div>
+                    <script type="application/json" id={`data-en-${project.id}`} set:html={JSON.stringify(project)} />
                 </div>
             ))}
         </div>
 
-        <!-- PL Projects -->
         <div class="grid grid-cols-1 gap-4 lang-pl hidden">
-            {projectsPl.map((project) => (
+            {projectsPl.map((project: any) => (
                 <div class="border border-gray-800 bg-gray-900/10 p-6 rounded hover:bg-gray-800/20 transition-colors group relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-2 opacity-20 group-hover:opacity-40 transition-opacity">
                         <span class="text-gray-500" set:html={icons.file} />
@@ -290,27 +287,22 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
                     </div>
                     <p class="text-sm text-gray-400 mb-4 leading-relaxed">{project.summary}</p>
                     <div class="flex flex-wrap gap-2 mb-6">
-                        {project.tech.map(t => <span class="text-xs bg-gray-800 text-gray-300 px-2 py-0.5 rounded">{t}</span>)}
+                        {project.tech.map((t: string) => <span class="text-xs bg-gray-800 text-gray-300 px-2 py-0.5 rounded">{t}</span>)}
                     </div>
                     
-                    <!-- FIX: Better button with border and background -->
                     <button 
-                        class="text-xs font-bold flex items-center gap-2 project-trigger border border-green-800 bg-green-900/20 px-3 py-1.5 rounded hover:bg-green-500 hover:text-black hover:border-green-500 transition-all w-fit"
+                        class="relative z-20 text-xs font-bold flex items-center gap-2 project-trigger border border-green-800 bg-green-900/20 px-3 py-1.5 rounded hover:bg-green-500 hover:text-black hover:border-green-500 transition-all w-fit cursor-pointer"
                         data-id={`pl-${project.id}`}
                     >
                         {ui.lbl_read_more.pl}
                     </button>
 
-                    <!-- Hidden Content for Modal -->
-                    <div id={`content-pl-${project.id}`} class="hidden">
-                        {project.content}
-                    </div>
+                    <script type="application/json" id={`data-pl-${project.id}`} set:html={JSON.stringify(project)} />
                 </div>
             ))}
         </div>
     </section>
 
-    <!-- Services Section -->
     <section class="mb-12 break-inside-avoid print:hidden">
         <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
             <span class="lang-en">{ui.services_header.en}</span>
@@ -334,7 +326,6 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="mb-12 break-inside-avoid print:hidden">
         <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
             <span class="lang-en">{ui.contact_header.en}</span>
@@ -361,16 +352,8 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
         </div>
     </section>
 
-    <!-- Footer -->
-    <div class="mt-20 pt-6 border-t border-gray-800 text-sm text-gray-600 flex justify-between">
-        <span>{ui.footer_eof}</span>
-        <span class="animate-pulse">_</span>
-    </div>
-
-    <!-- PROJECT MODAL (Hidden by default) -->
     <div id="project-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-[#0d1117] border border-green-900 w-full max-w-2xl rounded shadow-2xl flex flex-col max-h-[80vh]">
-            <!-- Modal Header -->
             <div class="bg-gray-900 p-3 border-b border-gray-800 flex justify-between items-center">
                 <div class="flex gap-2">
                     <div class="w-3 h-3 rounded-full bg-red-500"></div>
@@ -378,15 +361,11 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
                     <div class="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
                 <div class="text-gray-500 text-xs font-mono" id="modal-title-bar">project_log.txt</div>
-                <button id="close-modal" class="text-gray-500 hover:text-white">
+                <button id="close-modal" class="text-gray-500 hover:text-white cursor-pointer">
                     <span class="w-5 h-5" set:html={icons.close} />
                 </button>
             </div>
-            <!-- Modal Content -->
-            <div class="p-6 overflow-y-auto font-mono text-sm text-gray-300 leading-relaxed whitespace-pre-wrap" id="modal-body">
-                <!-- Content injected via JS -->
-            </div>
-            <!-- Modal Footer -->
+            <div class="p-6 overflow-y-auto font-mono text-sm text-gray-300 leading-relaxed" id="modal-body"></div>
             <div class="p-3 border-t border-gray-800 bg-gray-900/50 text-xs text-gray-600 font-mono flex justify-between">
                 <span>MODE: READ-ONLY</span>
                 <span class="lang-en">{ui.lbl_close_file.en} [ESC]</span>
@@ -395,96 +374,126 @@ const sortedAchievementsPl = getSortedAchievements(resumePl);
         </div>
     </div>
 
+    <script is:inline define:vars={{ headers: { 
+        problem: { en: ui.proj_problem.en, pl: ui.proj_problem.pl },
+        solution: { en: ui.proj_solution.en, pl: ui.proj_solution.pl },
+        arch: { en: ui.proj_arch.en, pl: ui.proj_arch.pl },
+        result: { en: ui.proj_result.en, pl: ui.proj_result.pl }
+    }}}>
+        // MODAL LOGIC (Robust Event Delegation)
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('project-modal');
+            const modalBody = document.getElementById('modal-body');
+            const modalTitle = document.getElementById('modal-title-bar');
+            
+            // Function to open Modal
+            function openModal(contentId, title) {
+                const dataScript = document.getElementById(`data-${contentId}`);
+                
+                if (!dataScript) {
+                    console.error(`Data not found for element: #data-${contentId}`);
+                    return;
+                }
+
+                if (!modal || !modalBody) {
+                    console.error("Critical: Modal DOM elements missing.");
+                    return;
+                }
+
+                try {
+                    // Use textContent to get the raw JSON string
+                    const project = JSON.parse(dataScript.textContent);
+                    const lang = contentId.startsWith('en-') ? 'en' : 'pl';
+                    
+                    let html = '';
+
+                    // 1. PROBLEM
+                    if (project.problem && project.problem.length > 0) {
+                        html += `<h5 class="text-purple-400 font-bold text-base mt-2 mb-2 uppercase border-b border-gray-800 pb-1 w-fit">${headers.problem[lang]}</h5>`;
+                        project.problem.forEach(text => html += `<p class="mb-2 text-gray-300">${text}</p>`);
+                    }
+
+                    // 2. SOLUTION
+                    if (project.solution && project.solution.length > 0) {
+                        html += `<h5 class="text-purple-400 font-bold text-base mt-6 mb-2 uppercase border-b border-gray-800 pb-1 w-fit">${headers.solution[lang]}</h5>`;
+                        html += `<ul class="space-y-2 mb-4">`;
+                        project.solution.forEach(item => {
+                            html += `<li class="flex items-start"><span class="text-green-500/70 mr-2 mt-0.5">></span><span>${item}</span></li>`;
+                        });
+                        html += `</ul>`;
+                    }
+
+                    // 3. ARCHITECTURE (Optional)
+                    if (project.architecture && project.architecture.length > 0) {
+                        html += `<h5 class="text-purple-400 font-bold text-base mt-6 mb-2 uppercase border-b border-gray-800 pb-1 w-fit">${headers.arch[lang]}</h5>`;
+                        project.architecture.forEach(text => html += `<p class="mb-2 text-gray-300">${text}</p>`);
+                    }
+
+                    // 4. RESULT
+                    if (project.result && project.result.length > 0) {
+                        html += `<h5 class="text-purple-400 font-bold text-base mt-6 mb-2 uppercase border-b border-gray-800 pb-1 w-fit">${headers.result[lang]}</h5>`;
+                        html += `<ul class="space-y-2 mb-4">`;
+                        project.result.forEach(item => {
+                            html += `<li class="flex items-start"><span class="text-yellow-500/70 mr-2 mt-0.5">✔</span><span>${item}</span></li>`;
+                        });
+                        html += `</ul>`;
+                    }
+
+                    modalBody.innerHTML = html;
+                    if(modalTitle) modalTitle.textContent = `${title.toLowerCase().replace(/\s+/g, '_')}.log`;
+                    
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    document.body.style.overflow = 'hidden'; // Lock background scrolling
+                } catch (e) {
+                    console.error("JSON Parse Error:", e);
+                }
+            }
+
+            function closeModal() {
+                if (modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                    document.body.style.overflow = ''; // Unlock background scrolling
+                }
+            }
+
+            // --- GLOBAL CLICK LISTENER (DELEGATION) ---
+            document.addEventListener('click', (e) => {
+                // 1. Handle Open Button (READ LOG)
+                const triggerBtn = e.target.closest('.project-trigger');
+                if (triggerBtn) {
+                    e.preventDefault(); 
+                    const id = triggerBtn.dataset.id;
+                    
+                    const card = triggerBtn.closest('.group'); 
+                    const titleElement = card ? card.querySelector('h4') : null;
+                    const title = titleElement ? titleElement.textContent : 'project'; 
+                    
+                    if (id) openModal(id, title);
+                    return;
+                }
+
+                // 2. Handle Close Button (X)
+                const closeBtn = e.target.closest('#close-modal');
+                if (closeBtn) {
+                    closeModal();
+                    return;
+                }
+
+                // 3. Handle Click Outside Modal
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Handle ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+
 </TerminalLayout>
-
-<script>
-    // MODAL LOGIC
-    const modal = document.getElementById('project-modal');
-    const modalBody = document.getElementById('modal-body');
-    const modalTitle = document.getElementById('modal-title-bar');
-    const closeBtn = document.getElementById('close-modal');
-    const triggers = document.querySelectorAll('.project-trigger');
-
-    function openModal(contentId: string, title: string) {
-        const contentDiv = document.getElementById(`content-${contentId}`);
-        if (contentDiv && modal && modalBody && modalTitle) {
-            // FIX: Improved text formatting logic
-            // This replaces raw newlines with better HTML structure for readability
-            const rawContent = contentDiv.textContent || '';
-            
-            // Format sections like "PROBLEM:", "SOLUTION:" with colors and spacing
-            let formattedHTML = rawContent
-                // Highlight headers (lines ending with :)
-                .replace(/([A-Z]+:)/g, '<br><span class="text-purple-400 font-bold block mt-4 mb-2">$1</span>')
-                // Handle bullet points if they exist in text (e.g. "- item")
-                .replace(/(\n- )/g, '<br><span class="text-green-500/70 mr-2">></span>')
-                // Clean up initial <br> if present
-                .replace(/^<br>/, '');
-
-            modalBody.innerHTML = formattedHTML;
-            modalTitle.textContent = `${title.toLowerCase().replace(/\s+/g, '_')}.log`;
-            
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
-    }
-
-    function closeModal() {
-        if (modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.body.style.overflow = '';
-        }
-    }
-
-    // Event Listeners
-    triggers.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const target = e.currentTarget as HTMLElement;
-            const id = target.dataset.id;
-            // Find title in parent
-            const card = target.closest('div');
-            const title = card?.querySelector('h4')?.textContent || 'project';
-            if (id) openModal(id, title);
-        });
-    });
-
-    closeBtn?.addEventListener('click', closeModal);
-    
-    // Close on outside click
-    modal?.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
-
-    // Close on ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
-            closeModal();
-        }
-    });
-
-    // --- Typewriter Effect ---
-    const text = "./show-resume.sh --verbose";
-    const element = document.getElementById("typewriter");
-    let index = 0;
-    function typeWriter() {
-        if (element && index < text.length) {
-            element.innerHTML += text.charAt(index);
-            index++;
-            setTimeout(typeWriter, 50); 
-        }
-    }
-    window.onload = typeWriter;
-
-    // --- Language Switcher Logic ---
-    const toggleBtn = document.getElementById('lang-toggle');
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-            const enElements = document.querySelectorAll('.lang-en');
-            const plElements = document.querySelectorAll('.lang-pl');
-            enElements.forEach(el => el.classList.toggle('hidden'));
-            plElements.forEach(el => el.classList.toggle('hidden'));
-        });
-    }
-</script>
