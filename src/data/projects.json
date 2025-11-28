@@ -1,0 +1,56 @@
+[
+  {
+    "id": "gdpr-compliance-system",
+    "title": "GDPR Compliance Data Collection System",
+    "role": "Lead Backend Engineer & DevOps Architect",
+    "tech": ["Java", "Spring Boot", "Azure DevOps", "Kafka", "Prometheus", "Grafana", "OpenShift"],
+    "summary": "Architecting the application layer and CI/CD workflows for a regulatory system collecting customer data to meet EU GDPR requirements.",
+    "problem": [
+      "The bank required a centralized system to collect customer data from various systems to fulfill EU GDPR requirements (Right of Access).",
+      "The challenge involved integrating disparate banking systems, ensuring high observability, and enabling a team of developers new to the Java/Spring ecosystem to deliver production-ready code."
+    ],
+    "solution": [
+      "Configured OpenShift namespaces and resource quotas for the project.",
+      "Designed and implemented robust CI/CD pipelines in Azure DevOps for automated delivery.",
+      "Developed a comprehensive Java/Spring Boot application skeleton that served as a standardized blueprint for the team.",
+      "Configured full observability (monitoring, logging, alerting) using Prometheus and Grafana.",
+      "Onboarded and mentored 3 developers, guiding them from zero to proficiency in Spring Boot."
+    ],
+    "architecture": [
+      "The system functioned as an event-driven consumer listening to Kafka topics.",
+      "Upon receiving a trigger, it orchestrated data retrieval from multiple banking systems, generated a comprehensive PDF report, and securely uploaded it to a file repository accessible via mobile and web channels for the end customer."
+    ],
+    "result": [
+      "Successfully met strict regulatory deadlines.",
+      "The mentored team delivered a stable, high-quality application independently.",
+      "The automated pipeline and observability setup reduced operational overhead to a minimum."
+    ]
+  }, 
+  {
+    "id": "translation-gateway-service",
+    "title": "Real-time Translation Gateway",
+    "role": "Senior Backend Engineer & SRE Architect",
+    "tech": ["Java", "Spring Boot", "OpenShift", "Service Discovery", "Micrometer", "Grafana", "CI/CD"],
+    "summary": "High-performance middleware connecting internal service discovery with an on-premise 3rd party translation engine for a multi-country contact center.",
+    "problem": [
+      "The Contact Center required real-time translation support for chatbots and agents across multiple countries.",
+      "The core challenge was integrating a 'black-box' on-premise vendor application. It lacked native observability, making it difficult to guarantee SLAs, debug errors, or analyze translation quality during traffic peaks."
+    ],
+    "solution": [
+      "Developed a robust Gateway application using Java and Spring Boot, deployed on OpenShift with zero-downtime deployment strategies.",
+      "Engineered the entire infrastructure and CI/CD pipelines from scratch to ensure seamless updates without service interruption.",
+      "Implemented a 'Deep Observability' layer: created custom metrics and logging wrappers to illuminate the 'black box' behavior, tracking request payloads, latency, and error rates.",
+      "Designed the architecture for high availability (HA) and horizontal scalability to withstand massive traffic spikes."
+    ],
+    "architecture": [
+      "The Gateway acts as a smart proxy / adapter layer.",
+      "It intercepts requests from the Banking Ecosystem (Service Discovery), enriches them with required metadata, and routes them to the on-premise vendor engine.",
+      "All traffic is asynchronously monitored via Micrometer/Prometheus to ensure zero impact on latency."
+    ],
+    "result": [
+      "Achieved a perfect 100% availability record over two years.",
+      "Successfully performed seamless deployments with zero downtime, maintaining continuous service even during updates.",
+      "Transformed a 'black box' system into a transparent service, providing critical metrics that allowed business teams to improve translation quality."
+    ]
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "id": "gdpr-compliance-system",
+    "title": "System Zgodności Danych RODO",
+    "role": "Główny Inżynier Backend & Architekt DevOps",
+    "tech": ["Java", "Spring Boot", "Azure DevOps", "Kafka", "Prometheus", "Grafana", "OpenShift"],
+    "summary": "Zaprojektowanie warstwy aplikacji i procesów CI/CD dla systemu zbierającego dane klientów w celu spełnienia wymogów RODO.",
+    "problem": [
+      "Bank potrzebował scentralizowanego systemu do zbierania danych klientów z różnych systemów, aby spełnić unijne wymogi RODO (Prawo do dostępu).",
+      "Wyzwanie polegało na integracji rozproszonych systemów bankowych, zapewnieniu wysokiej dostępności oraz wdrożeniu zespołu programistów, dla których ekosystem Java/Spring był nowością."
+    ],
+    "solution": [
+      "Skonfigurowałem namespaces i limity zasobów na platformie OpenShift.",
+      "Zaprojektowałem i wdrożyłem CI/CD w Azure DevOps.",
+      "Stworzyłem kompleksowy szkielet aplikacji Java/Spring Boot, który posłużył jako standard dla całego zespołu.",
+      "Skonfigurowałem pełną obserwowalność (monitoring, logowanie, alertowanie) przy użyciu Prometheus i Grafana.",
+      "Wdrożyłem i mentorowałem 3 programistów, przeprowadzając ich od podstaw do samodzielności w Spring Boot."
+    ],
+    "architecture": [
+      "System działał jako konsument sterowany zdarzeniami (event-driven), nasłuchujący na tematach Kafki.",
+      "Po otrzymaniu sygnału, orkiestrował pobieranie danych z wielu systemów bankowych, generował raport PDF i bezpiecznie umieszczał go w repozytorium plików dostępnym dla klienta końcowego przez aplikację mobilną i WWW."
+    ],
+    "result": [
+      "Terminowe spełnienie sztywnych wymogów regulacyjnych.",
+      "Zespół, dzięki mentoringowi, dostarczył stabilną aplikację wysokiej jakości.",
+      "Zautomatyzowane pipeline i monitoring zminimalizowały nakład pracy operacyjnej."
+    ]
+  }, 
+ {
+    "id": "translation-gateway-service",
+    "title": "Bramka Tłumaczeń Czasu Rzeczywistego",
+    "role": "Starszy Inżynier Backend & Architekt SRE",
+    "tech": ["Java", "Spring Boot", "OpenShift", "Service Discovery", "Micrometer", "Grafana", "CI/CD"],
+    "summary": "Wydajne oprogramowanie pośredniczące (middleware) łączące wewnętrzne Discovery z zewnętrznym silnikiem tłumaczeń on-premise dla międzynarodowego Contact Center.",
+    "problem": [
+      "Contact Center potrzebowało wsparcia tłumaczeniowego w czasie rzeczywistym dla chatbotów i agentów w wielu krajach.",
+      "Głównym wyzwaniem była integracja z aplikacją dostawcy typu 'black-box'. Brakowało jej natywnej obserwowalności, co utrudniało gwarantowanie SLA, diagnozowanie błędów oraz analizę jakości tłumaczeń podczas szczytów ruchu."
+    ],
+    "solution": [
+      "Stworzyłem solidną aplikację Gateway w Java/Spring Boot, wdrożoną na platformie OpenShift z wykorzystaniem strategii zero-downtime deployment.",
+      "Zaprojektowałem infrastrukturę oraz pipeline'y CI/CD tak, aby umożliwić aktualizacje wersji bez jakiejkolwiek przerwy w świadczeniu usług.",
+      "Wdrożyłem warstwę 'Głębokiej Obserwowalności': stworzyłem niestandardowe metryki i logowanie, aby 'oświetlić' działanie czarnej skrzynki, śledząc payloady żądań, opóźnienia i błędy.",
+      "Zaprojektowałem architekturę pod kątem wysokiej dostępności (HA) i skalowalności poziomej."
+    ],
+    "architecture": [
+      "Gateway działa jako inteligentne proxy / warstwa adaptacyjna.",
+      "Przechwytuje żądania z ekosystemu bankowego, wzbogaca je o metadane i kieruje do silnika dostawcy zainstalowanego on-premise.",
+      "Cały ruch jest asynchronicznie monitorowany przez Micrometer/Prometheus, aby zapewnić zerowy wpływ na opóźnienia (latency)."
+    ],
+    "result": [
+      "Utrzymano 100% dostępności serwisu przez dwa lata.",
+      "Wdrożenia nowych wersji odbywały się całkowicie bezinwazyjnie (zero downtime), bez przerywania obsługi klienta.",
+      "Przekształcono system typu 'black box' w transparentną usługę, dostarczając kluczowych metryk, które pozwoliły biznesowi podnieść jakość tłumaczeń."
+    ]
+  }
+]

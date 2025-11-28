@@ -12,18 +12,28 @@ export const ui = {
     skills_header: { en: "01_SKILLS", pl: "01_UMIEJĘTNOŚCI" },
     experience_header: { en: "02_EXPERIENCE_LOG", pl: "02_HISTORIA_ZATRUDNIENIA" },
     education_header: { en: "03_EDUCATION", pl: "03_EDUKACJA" },
-    
     achievements_header: { en: "04_ACHIEVEMENTS_&_AWARDS", pl: "04_OSIĄGNIĘCIA_I_NAGRODY" },
-    services_header: { en: "05_AVAILABLE_SERVICES", pl: "05_DOSTĘPNE_USŁUGI" },
-    contact_header: { en: "06_COMMUNICATION_UPLINK", pl: "06_KANAŁ_KOMUNIKACJI" },
+    projects_header: { en: "05_PROJECT_ARCHIVES", pl: "05_ARCHIWUM_PROJEKTÓW" },
+    
+    services_header: { en: "06_AVAILABLE_SERVICES", pl: "06_DOSTĘPNE_USŁUGI" },
+    contact_header: { en: "07_COMMUNICATION_UPLINK", pl: "07_KANAŁ_KOMUNIKACJI" },
     
     // Labels
     backend_scan: { en: "Backend.scan()", pl: "Backend.skanuj()" },
     devops_scan: { en: "DevOps.scan()", pl: "DevOps.skanuj()" },
     lbl_award: { en: "[ AWARD ]", pl: "[ NAGRODA ]" },
     lbl_cert: { en: "[ CERT ]", pl: "[ CERTYFIKAT ]" },
-    // FIX: Changed from DEGREE/DYPLOM to FIELD/KIERUNEK to be honest about unfinished degree
     lbl_field: { en: "[ FIELD ]", pl: "[ KIERUNEK ]" },
+    
+    // Project Section Labels
+    lbl_read_more: { en: "[ READ_LOG ]", pl: "[ CZYTAJ_LOG ]" },
+    lbl_close_file: { en: "[ CLOSE_FILE ]", pl: "[ ZAMKNIJ_PLIK ]" },
+    
+    // Project Content Headers (New)
+    proj_problem: { en: "PROBLEM:", pl: "PROBLEM:" },
+    proj_solution: { en: "SOLUTION:", pl: "ROZWIĄZANIE:" },
+    proj_arch: { en: "ARCHITECTURE:", pl: "ARCHITEKTURA:" },
+    proj_result: { en: "RESULT:", pl: "WYNIK:" },
     
     // Contact Section
     protocol_linkedin: { en: "Protocol: SECURE_LINKEDIN_HANDSHAKE", pl: "Protokół: BEZPIECZNE_POŁĄCZENIE_LI" },
@@ -75,5 +85,7 @@ export const icons = {
     lang: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
     cert: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>`,
     trophy: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2h-6c-2.76 0-5 .78-5 4v4a10 10 0 0 0 10 10 4 4 0 0 0 10-10V6c0-3.22-2.24-4-5-4z"/></svg>`,
-    university: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`
+    university: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
+    file: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
+    close: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>`
 };
