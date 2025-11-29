@@ -1,0 +1,46 @@
+---
+import resumeEn from '../../data/resume.json';
+import resumePl from '../../data/resume_pl.json';
+import { ui } from '../../data/siteConfig';
+---
+
+<section class="mb-12 break-inside-avoid">
+    <h3 class="text-xl font-bold text-white mb-4 border-b border-gray-800 inline-block text-glow">
+        <span class="lang-en">{ui.skills_header.en}</span>
+        <span class="lang-pl hidden">{ui.skills_header.pl}</span>
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+            <span class="text-purple-400 text-sm block mb-2">> 
+                <span class="lang-en">{ui.backend_scan.en}</span>
+                <span class="lang-pl hidden">{ui.backend_scan.pl}</span>
+            </span>
+            <div class="flex flex-wrap gap-2 lang-en">
+                {resumeEn.skills.backend.map((skill: string) => (
+                    <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">{skill}</span>
+                ))}
+            </div>
+            <div class="flex flex-wrap gap-2 lang-pl hidden">
+                {resumePl.skills.backend.map((skill: string) => (
+                    <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">{skill}</span>
+                ))}
+            </div>
+        </div>
+        <div>
+            <span class="text-purple-400 text-sm block mb-2">> 
+                <span class="lang-en">{ui.devops_scan.en}</span>
+                <span class="lang-pl hidden">{ui.devops_scan.pl}</span>
+            </span>
+            <div class="flex flex-wrap gap-2 lang-en">
+                {resumeEn.skills.devops.map((skill: string) => (
+                    <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">{skill}</span>
+                ))}
+            </div>
+            <div class="flex flex-wrap gap-2 lang-pl hidden">
+                {resumePl.skills.devops.map((skill: string) => (
+                    <span class="bg-gray-800 text-gray-300 px-2 py-1 text-xs rounded hover:bg-green-900 hover:text-white transition-colors cursor-default border border-gray-700">{skill}</span>
+                ))}
+            </div>
+        </div>
+    </div>
+</section>
