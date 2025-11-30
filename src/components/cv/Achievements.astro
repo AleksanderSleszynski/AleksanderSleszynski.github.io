@@ -1,0 +1,69 @@
+---
+import resumeEn from '../../data/resume.json';
+import resumePl from '../../data/resume_pl.json';
+import { ui, icons } from '../../data/siteConfig';
+import type { Award, Certificate, ResumeData } from '../../types';
+
+const getSortedAchievements = (data: ResumeData) => {
+    const awards = (data.awards || []).map((a: Award) => ({ ...a, type: 'award', displayTitle: a.title }));
+    const certs = (data.certificates || []).map((c: Certificate) => ({ ...c, type: 'cert', displayTitle: c.name }));
+    
+    return [...awards, ...certs].sort((a, b) => {
+        const getYear = (d: string) => {
+            const match = d.match(/\d{4}/);
+            return match ? parseInt(match[0]) : 0;
+        };
+        return getYear(b.date) - getYear(a.date);
+    });
+};
+
+const sortedAchievementsEn = getSortedAchievements(resumeEn as ResumeData);
+const sortedAchievementsPl = getSortedAchievements(resumePl as ResumeData);
+---
+
+<section class="mb-12 break-inside-avoid">
+    <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
+        <span class="lang-en">{ui.achievements_header.en}</span>
+        <span class="lang-pl hidden">{ui.achievements_header.pl}</span>
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- EN -->
+        <div class="lang-en contents">
+            {sortedAchievementsEn.map((item) => (
+                <div class={`border p-4 rounded transition-colors group ${item.type === 'award' ? 'border-yellow-900/40 bg-yellow-900/10 hover:border-yellow-500/50' : 'border-gray-800 bg-gray-900/20 hover:border-green-500/50'}`}>
+                    <div class="flex items-start justify-between mb-2">
+                        <span class={`${item.type === 'award' ? 'text-yellow-500 group-hover:text-yellow-300' : 'text-green-400 group-hover:text-green-300'}`} set:html={item.type === 'award' ? icons.trophy : icons.cert} />
+                        <span class={`text-xs border px-1 rounded ${item.type === 'award' ? 'text-yellow-600/80 border-yellow-900/50' : 'text-gray-600 border-gray-800'}`}>
+                            {item.type === 'award' ? ui.lbl_award.en : ui.lbl_cert.en}
+                        </span>
+                    </div>
+                    <h4 class="font-bold text-gray-200 text-sm mb-1">{item.displayTitle}</h4>
+                    <div class="flex justify-between text-xs text-gray-500 font-mono mt-2">
+                        <span>{item.issuer}</span>
+                        <span>{item.date}</span>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <!-- PL -->
+        <div class="lang-pl contents hidden">
+            {sortedAchievementsPl.map((item) => (
+                <div class={`border p-4 rounded transition-colors group ${item.type === 'award' ? 'border-yellow-900/40 bg-yellow-900/10 hover:border-yellow-500/50' : 'border-gray-800 bg-gray-900/20 hover:border-green-500/50'}`}>
+                    <div class="flex items-start justify-between mb-2">
+                        <span class={`${item.type === 'award' ? 'text-yellow-500 group-hover:text-yellow-300' : 'text-green-400 group-hover:text-green-300'}`} set:html={item.type === 'award' ? icons.trophy : icons.cert} />
+                        <span class={`text-xs border px-1 rounded ${item.type === 'award' ? 'text-yellow-600/80 border-yellow-900/50' : 'text-gray-600 border-gray-800'}`}>
+                            {item.type === 'award' ? ui.lbl_award.pl : ui.lbl_cert.pl}
+                        </span>
+                    </div>
+                    <h4 class="font-bold text-gray-200 text-sm mb-1">{item.displayTitle}</h4>
+                    <div class="flex justify-between text-xs text-gray-500 font-mono mt-2">
+                        <span>{item.issuer}</span>
+                        <span>{item.date}</span>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>

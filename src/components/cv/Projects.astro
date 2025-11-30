@@ -1,0 +1,81 @@
+---
+import projectsEn from '../../data/projects.json';
+import projectsPl from '../../data/projects_pl.json';
+import { ui, icons } from '../../data/siteConfig';
+import type { Project } from '../../types';
+
+// Type assertion to ensure TS treats imports correctly
+const typedProjectsEn = projectsEn as Project[];
+const typedProjectsPl = projectsPl as Project[];
+---
+
+<section class="mb-12 break-inside-avoid">
+    <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
+        <span class="lang-en">{ui.projects_header.en}</span>
+        <span class="lang-pl hidden">{ui.projects_header.pl}</span>
+    </h3>
+
+    <!-- EN Projects -->
+    <div class="grid grid-cols-1 gap-4 lang-en">
+        {typedProjectsEn.map((project) => (
+            <div class="border border-gray-800 bg-gray-900/10 p-6 rounded hover:bg-gray-800/20 transition-colors group relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-2 opacity-20 group-hover:opacity-40 transition-opacity">
+                    <span class="text-gray-500" set:html={icons.file} />
+                </div>
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h4 class="font-bold text-gray-100 text-lg mb-1">{project.title}</h4>
+                        <div class="text-xs text-purple-400 font-mono mb-2">> Role: {project.role}</div>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-400 mb-4 leading-relaxed">{project.summary}</p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    {project.tech.map((t) => <span class="text-xs bg-gray-800 text-gray-300 px-2 py-0.5 rounded">{t}</span>)}
+                </div>
+                
+                <!-- Trigger button for the modal logic located in ProjectModal.astro -->
+                <button 
+                    class="relative z-20 text-xs font-bold flex items-center gap-2 project-trigger border border-green-800 bg-green-900/20 px-3 py-1.5 rounded hover:bg-green-500 hover:text-black hover:border-green-500 transition-all w-fit cursor-pointer"
+                    data-id={`en-${project.id}`}
+                >
+                    {ui.lbl_read_more.en}
+                </button>
+                
+                <!-- Raw JSON injection for the modal script to parse -->
+                <script type="application/json" id={`data-en-${project.id}`} set:html={JSON.stringify(project)} />
+            </div>
+        ))}
+    </div>
+
+    <!-- PL Projects -->
+    <div class="grid grid-cols-1 gap-4 lang-pl hidden">
+        {typedProjectsPl.map((project) => (
+            <div class="border border-gray-800 bg-gray-900/10 p-6 rounded hover:bg-gray-800/20 transition-colors group relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-2 opacity-20 group-hover:opacity-40 transition-opacity">
+                    <span class="text-gray-500" set:html={icons.file} />
+                </div>
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h4 class="font-bold text-gray-100 text-lg mb-1">{project.title}</h4>
+                        <div class="text-xs text-purple-400 font-mono mb-2">> Rola: {project.role}</div>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-400 mb-4 leading-relaxed">{project.summary}</p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    {project.tech.map((t) => <span class="text-xs bg-gray-800 text-gray-300 px-2 py-0.5 rounded">{t}</span>)}
+                </div>
+                
+                <!-- Trigger button for the modal logic located in ProjectModal.astro -->
+                <button 
+                    class="relative z-20 text-xs font-bold flex items-center gap-2 project-trigger border border-green-800 bg-green-900/20 px-3 py-1.5 rounded hover:bg-green-500 hover:text-black hover:border-green-500 transition-all w-fit cursor-pointer"
+                    data-id={`pl-${project.id}`}
+                >
+                    {ui.lbl_read_more.pl}
+                </button>
+
+                <!-- Raw JSON injection for the modal script to parse -->
+                <script type="application/json" id={`data-pl-${project.id}`} set:html={JSON.stringify(project)} />
+            </div>
+        ))}
+    </div>
+</section>

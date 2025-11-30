@@ -1,0 +1,26 @@
+---
+import { ui, services } from '../../data/siteConfig';
+---
+
+<section class="mb-12 break-inside-avoid print:hidden">
+    <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
+        <span class="lang-en">{ui.services_header.en}</span>
+        <span class="lang-pl hidden">{ui.services_header.pl}</span>
+    </h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {services.map((service) => (
+            <div class="border border-gray-800 bg-gray-900/10 p-4 rounded hover:bg-gray-800/30 hover:border-blue-500/50 transition-all group">
+                <div class="mb-3 text-blue-400 group-hover:text-blue-300" set:html={service.icon} />
+                <h4 class="font-bold text-gray-200 text-sm mb-2">
+                    <span class="lang-en">{service.title.en}</span>
+                    <span class="lang-pl hidden">{service.title.pl}</span>
+                </h4>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                    <span class="lang-en">{service.desc.en}</span>
+                    <span class="lang-pl hidden">{service.desc.pl}</span>
+                </p>
+            </div>
+        ))}
+    </div>
+</section>

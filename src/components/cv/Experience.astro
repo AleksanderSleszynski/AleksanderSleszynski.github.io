@@ -1,0 +1,44 @@
+---
+import resumeEn from '../../data/resume.json';
+import resumePl from '../../data/resume_pl.json';
+import { ui } from '../../data/siteConfig';
+---
+
+<section class="mb-12">
+    <h3 class="text-xl font-bold text-white mb-6 border-b border-gray-800 inline-block text-glow">
+        <span class="lang-en">{ui.experience_header.en}</span>
+        <span class="lang-pl hidden">{ui.experience_header.pl}</span>
+    </h3>
+    
+    <div class="space-y-8 lang-en">
+        {resumeEn.work.map((job: any) => (
+            <div class="relative pl-6 border-l border-gray-700 hover:border-green-500 transition-colors duration-300 break-inside-avoid">
+                <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-gray-700 rounded-full"></div>
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
+                    <h4 class="text-lg font-bold text-gray-100">{job.position}</h4>
+                    <span class="text-sm text-gray-500 font-bold">{job.startDate} — {job.endDate}</span>
+                </div>
+                <div class="text-purple-400 text-sm mb-2">@ {job.company}</div>
+                <ul class="list-none space-y-1">
+                    {job.highlights.map((item: string) => <li class="text-gray-400 text-sm flex items-start"><span class="mr-2 text-green-500 opacity-50">></span>{item}</li>)}
+                </ul>
+            </div>
+        ))}
+    </div>
+
+    <div class="space-y-8 lang-pl hidden">
+        {resumePl.work.map((job: any) => (
+            <div class="relative pl-6 border-l border-gray-700 hover:border-green-500 transition-colors duration-300 break-inside-avoid">
+                <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-gray-700 rounded-full"></div>
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
+                    <h4 class="text-lg font-bold text-gray-100">{job.position}</h4>
+                    <span class="text-sm text-gray-500 font-bold">{job.startDate} — {job.endDate}</span>
+                </div>
+                <div class="text-purple-400 text-sm mb-2">@ {job.company}</div>
+                <ul class="list-none space-y-1">
+                    {job.highlights.map((item: string) => <li class="text-gray-400 text-sm flex items-start"><span class="mr-2 text-green-500 opacity-50">></span>{item}</li>)}
+                </ul>
+            </div>
+        ))}
+    </div>
+</section>

@@ -1,0 +1,37 @@
+---
+import resumeEn from '../../data/resume.json';
+import resumePl from '../../data/resume_pl.json';
+import { icons } from '../../data/siteConfig';
+---
+
+<header class="mb-12 border-b border-gray-800 pb-8 relative">
+    <div class="lang-en">
+        <h1 class="text-5xl font-bold text-gray-100 mb-2 text-glow">{resumeEn.basics.name}</h1>
+        <h2 class="text-2xl text-gray-400 mb-6">{resumeEn.basics.label}</h2>
+        <p class="text-gray-400 max-w-2xl text-sm italic mb-6 border-l-2 border-gray-700 pl-4">{resumeEn.basics.summary}</p>
+    </div>
+    <div class="lang-pl hidden">
+        <h1 class="text-5xl font-bold text-gray-100 mb-2 text-glow">{resumePl.basics.name}</h1>
+        <h2 class="text-2xl text-gray-400 mb-6">{resumePl.basics.label}</h2>
+        <p class="text-gray-400 max-w-2xl text-sm italic mb-6 border-l-2 border-gray-700 pl-4">{resumePl.basics.summary}</p>
+    </div>
+
+    <div class="flex flex-wrap gap-6 text-sm text-gray-400 mt-6 print:text-black">
+        <div class="flex items-center gap-2 hover:text-green-400 transition-colors">
+            <span class="lang-en">📍 {resumeEn.basics.location}</span>
+            <span class="lang-pl hidden">📍 {resumePl.basics.location}</span>
+        </div>
+        {resumeEn.basics.github && (
+            <a href={`https://github.com/${resumeEn.basics.github}`} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-green-400 transition-colors">
+                <span class="w-5 h-5" set:html={icons.github} />
+                GitHub
+            </a>
+        )}
+        {resumeEn.basics.linkedin && (
+            <a href={resumeEn.basics.linkedin} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-green-400 transition-colors">
+                <span class="w-5 h-5" set:html={icons.linkedin} />
+                LinkedIn
+            </a>
+        )}
+    </div>
+</header>
